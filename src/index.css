@@ -6,20 +6,53 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-repeat: no-repeat;
- background-attachment: fixed;
- background-size: cover;
- background-position: top;
- background-image:url('./assets/dragon1.jpeg');
- width: 100%;
- height: 100%;
- font-family: Arial, Helvetica;
- letter-spacing: 0.02em;
+  background: url('./assets/dragon3.jpeg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  font-family: Arial, Helvetica;
+  letter-spacing: 0.02em;
   font-weight: 400;
- -webkit-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased; 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+}
+.game-name { grid-area: 1 / 1 / 2 / 4; }
+
+.ads { grid-area: 2 / 1 / 2 / 4; }
+
+.lives { grid-area: 3 / 1 / 3 / 2; }
+
+.score { grid-area: 3 / 2 / 3 / 3; }
+
+.gold { grid-area: 3 / 3 / 3 / 4; }
+
+html, body , .container {
+  height: 100%;
+  margin: 0;
+}
+
+.container * {
+  margin: 15px 50px;
+  border: 5px solid #fc7800;
+  padding: 20px;
+  color: #fff;
+  font-family: Architects Daughter;
+  font-size: x-large;
+  font-weight: 700;
+}
+
+

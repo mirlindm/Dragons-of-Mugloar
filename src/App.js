@@ -2,13 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import { api } from './constants';
-import { StyledButton, StyledSubPar } from './styles/styles';
+import { StyledButton } from './styles/styles';
 import { startGame } from './services/gameService'
+import { Welcome } from './pages/Welcome';
+import { Modal } from 'antd';
 
-function App() {
+const App = () => {
   const [gameData, setGameData] = React.useState('');
   const [gameStarted, setGameStarted] = React.useState(false);
   const [gameMessages, setGameMessages] = React.useState([]);
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const startGameApi = async () => {
     const { data }  = await startGame();
@@ -21,38 +24,63 @@ function App() {
     const url = `${gameData.gameId}/messages`;
     axios.get(api + url)
       .then(response => {console.log("Messages: ", response.data);    
-        setGameMessages(response.data)
+        setGameMessages(response.data);
       })
       .catch(err => console.log(err))
   }
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <div className="App">
-      <p style={{marginTop: '100px', fontWeight: 'bolder', fontSize: '100px', fontFamily: 'Architects Daughter', color: 'orange'}}>
-        Dragons of Mugolar
-      </p> 
-      
-      <StyledSubPar>
-        Press Play to Begin
-      </StyledSubPar>
-      
-      <StyledButton onClick={startGameApi}> Play Game </StyledButton>
+      {!gameStarted && 
+      <>
+        <Welcome />
+
+        <StyledButton onClick={startGameApi}> Play Game </StyledButton>
+        <p style={{textDecoration: 'underline', color: '#fff'}}> Find Instructions </p>
+      </>
+      }
 
       {gameStarted &&
-      <> 
-        <p> Game {gameData.gameId} has started! 
-          You have {gameData.lives} lives, and {gameData.gold} gold! 
-          <br/>
-          <button onClick={getMessagesForGame}> Get Game Messages </button>
-          <br/>
-          {gameMessages.map((message) => {
-            return (            
-              <span key={message.adId} style={{width: '100px', display: 'block', margin: 'auto', marginTop: '2px', border: '3px solid black'}}> {message.adId} </span>        
-            )
-          })}
+      <>
+        <div className="container">
+          <h2 className="game-name">Game {gameData.gameId} has started!</h2>
+        </div>
 
-        </p>
-        <h3 style={{position: 'relative', top: '600px'}}> Your score is: {gameData.score}  </h3>
+        <div>
+            <StyledButton style={{margin: 'auto'}} onClick={() => {getMessagesForGame(); showModal()}}> Show me Ads </StyledButton>
+            
+            {/* {gameMessages.map((message) => {
+              return (            
+                <span key={message.adId} style={{width: '10px', display: 'inline-block', margin: 'auto', marginTop: '2px', border: '3px solid black'}}> {message.adId} </span>        
+              )
+            })}    */}
+
+            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Modal> 
+
+        </div>
+
+        <div className="container"> 
+          <p  className="lives"> {gameData.lives} lives </p>
+          <p  className="gold"> {gameData.gold} gold </p>
+          <p  className="score">Your score: {gameData.score}</p>
+        </div>
+
+        
       </>
       }
     </div>

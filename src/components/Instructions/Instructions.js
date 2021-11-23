@@ -1,51 +1,35 @@
 import React from 'react';
-import { Popover, Button } from 'antd';
+import { Timeline, Popover, Button } from 'antd';
+import { ClockCircleOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
+import { StyledSubPar } from '../../styles/styles';
 
-export const Instructions = () => {  
-  const [clicked, setClicked] = React.useState(false);
-  const [hovered, setHovered] = React.useState(false);
 
-  const hide = () => {
-    setClicked(false);
-    setHovered(false);
-  };
 
-  const handleHoverChange = visible => {
-    setClicked(false);
-    setHovered(visible);
-  };
 
-  const handleClickChange = visible => {
-    setClicked(visible);
-    setHovered(false);
-  };
+export const Instructions = () => {
 
-    const hoverContent = <div>This is hover content.</div>;
-    const clickContent = <div>This is click content.</div>;
+  const gameInstructions = (
+    <Timeline mode="alternate">
+      <Timeline.Item color="red">Press on START firey button</Timeline.Item>
+      <Timeline.Item color="red">Game xxx has begun</Timeline.Item>
+      <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
+        View Stats (score, lives &amp; gold)
+      </Timeline.Item>
+      <Timeline.Item color="red">View all Ads. Purchase any ad</Timeline.Item>
+      <Timeline.Item color="red"> Purchase items, as needed </Timeline.Item>
+      <Timeline.Item color="red">Score higher than 1000!</Timeline.Item>
+    </Timeline>
+  ) 
 
-  return(
-      <Popover
-        style={{ width: 500 }}
-        content={hoverContent}
-        title="Hover title"
-        trigger="hover"
-        visible={hovered}
-        onVisibleChange={handleHoverChange}
-      >
-        <Popover
-          content={
-            <div>
-              {clickContent}
-              <a onClick={hide}>Close</a>
-            </div>
-          }
-          title="Click title"
-          trigger="click"
-          visible={clicked}
-          onVisibleChange={handleClickChange}
-        >
-           <Button style={{textDecoration: 'underline', color: '#fff'}}> Find Instructions </Button>
-        </Popover>
+  return (
+    <div style={{position: 'absolute', left: '20%', right: '20%', bottom: '10%'}}>   
+      <Popover content={gameInstructions} placement="bottom" title="Not sure how to play the game?" trigger="hover">
+        <StyledSubPar>Find Instructions</StyledSubPar>
       </Popover>
-  );
+    </div>
+
+  )
 }
+  
+  

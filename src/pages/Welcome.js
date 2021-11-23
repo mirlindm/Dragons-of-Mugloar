@@ -1,17 +1,16 @@
 import React from 'react';
-import { StyledSubPar } from '../styles/styles';
-
+import { StyledHeading, StyledSubPar } from '../styles/styles';
 
 export const Welcome = () => {
     return (
-        <>
-            <p style={{marginTop: '100px', fontWeight: 'bolder', fontSize: '100px', fontFamily: 'Architects Daughter', color: '#fc7800'}}>
+        <div>
+            <StyledHeading>
                 Dragons of Mugolar
-            </p> 
+            </StyledHeading> 
             
             <StyledSubPar>
-                Hit Play to Slay
+                Hit Start to Play
             </StyledSubPar>
-        </>
+        </div>
     )
 }

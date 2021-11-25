@@ -1,11 +1,7 @@
 import React from 'react';
-import { Timeline, Popover, Button } from 'antd';
+import { Timeline, Popover } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
 import { StyledSubPar } from '../../styles/styles';
-
-
-
 
 export const Instructions = () => {
 

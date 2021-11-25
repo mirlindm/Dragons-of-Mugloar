@@ -1,27 +1,28 @@
-import { api } from '../constants';
-import axios from 'axios';
+import { baseApi } from './baseService';
 
 export const startGame = () => {
-    const url = 'game/start';
-    return axios.post(api + url);
+    const endpoint = 'game/start';
+    return baseApi.post(endpoint);
 }
 
-export const getMessagesForGame = () => {
-    const url = ':gameId/messages';
-    axios.get(api + url);
+export const getMessagesForGame = (gameId) => {
+    const endpoint = `${gameId}/messages`;
+    return baseApi.get(endpoint);
 }
 
 export const solveMessage = (gameId, adId) => {
-    const url = `${gameId}/solve/${adId}`;
-    axios.post(api + url);
-}  
+    const endpoint = `${gameId}/solve/${adId}`;
+    return baseApi.post(endpoint);
+} 
 
-export const itemsInShop = (gameId) => {
+export const getItemsInShop = (gameId) => {
     const url = `${gameId}/shop`;
-    axios.get(api + url);
+    return baseApi.get(url);
 } 
 
 export const purchaseItem = (gameId, itemId) => {
     const url = `${gameId}/shop/buy/${itemId}`;
-    axios.get(api + url);
-} 
+    return baseApi.post(url);
+}
+
+

@@ -2,14 +2,20 @@ import styled from "styled-components";
 import { Button } from 'antd';
 
 export const StyledHeading = styled.h1`
-  font-size: 130px;
-  font-weight: bolder;    
-  background: -webkit-linear-gradient(#fbbd47, #e25822);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: Architects Daughter, cursive;
-  position: relative;
-  top: 100px;
+    font-size: 130px;
+    font-weight: bolder;    
+    background: -webkit-linear-gradient(#fbbd47, #e25822);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Architects Daughter, cursive;
+    position: relative;
+    top: 100px;
+    mix-blend-mode: difference;
+
+    @media only screen and (max-width: 950px) {
+        font-size: 100px;
+        margin-bottom: 100px;
+    }
 `;
 
 export const StyledSubPar = styled.p`    
@@ -20,7 +26,7 @@ export const StyledSubPar = styled.p`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
-    margin-top: -50px;
+    margin-top: -40px;
     position: relative;
     z-index: 10;
     padding: 5px; 

@@ -1,1 +1,1 @@
-export const api = 'https://dragonsofmugloar.com/api/v2/';
+export const API_URL = 'https://dragonsofmugloar.com/api/v2/';

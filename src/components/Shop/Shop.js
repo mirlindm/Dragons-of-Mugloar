@@ -1,14 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Drawer, Button, Space, Radio } from 'antd';
+import { Drawer, Button, Space, message } from 'antd';
+import { getItemsInShop, purchaseItem } from '../../services/gameService';
 import { StyledButton } from '../../styles/styles';
+import styled from 'styled-components';
+
+const DrawerLayout = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid red;
+  margin-top: 10px;
+`;
+
+const DrawerContent = styled.div`
+  flex: 50%;
+  height: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid red;
+`;  
 
 export const Shop = (props) => {
   const [visible, setVisible] = useState(false);
+  const [itemsInShop, setItemsInShop] = React.useState([]);
 
-    useEffect(()  => {
-        console.log("Props", props.name)
-    })
+  const getItemsInShopApi = async () => {
+    const { data } = await getItemsInShop(props.gameId);
+    if(data) {
+      setItemsInShop(data);
+      console.log("here", data);
+    }
+  }
+
+  const purchaseItemApi = async (itemId, itemCost) => {
+    if(props.gold < itemCost) {
+      return message.warning("Not enough gold!");
+    }
+    const { data } = await purchaseItem(props.gameId, itemId);
+    if (data) {
+      console.log(data);
+      message.success("Item bought");      
+    } 
+  }
 
   const showDrawer = () => {
     setVisible(true);
@@ -21,13 +54,14 @@ export const Shop = (props) => {
   return (
     <>
       <Space>
-        <StyledButton onClick={showDrawer}>
-        <i class="fas fa-shopping-cart"></i>
+        <StyledButton onClick={() => {showDrawer(); getItemsInShopApi()}}>
+          Shop &nbsp;
+        <i className="fas fa-shopping-cart"></i>
         </StyledButton>
       </Space>
       
       <Drawer
-        title="Your stats for the game"
+        title="Welcome to the dragon shop 🎁"
         placement={"right"}
         width={500}
         onClose={onClose}
@@ -41,12 +75,20 @@ export const Shop = (props) => {
           </Space>
         }
       >
-       <div className="container"> 
-          <p  className="lives"> {props.lives} lives </p>
-          <p  className="gold"> {props.gold} gold </p>
-          <p  className="score">Your score: {props.score}</p>
-          
-        </div>
+        <DrawerLayout>
+          {itemsInShop.map((item) => {
+            return(
+            <DrawerContent key={item.id}>               
+              <h2 style={{color: '#f76707', fontSize: '20px'}}> {item.name} </h2>
+              <p> {item.id} </p>
+              <hr />
+              <p> Cost: {item.cost} </p>
+              <Button onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </Button>
+
+            </DrawerContent>
+            )
+          })}
+        </DrawerLayout>
       </Drawer>
     </>
   );

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
-import { Drawer, Button, Space, Radio } from 'antd';
+import { Drawer, Button, Space } from 'antd';
 import { StyledButton } from '../../styles/styles';
 
 export const Stats = (props) => {
   const [visible, setVisible] = useState(false);
-  const [placement, setPlacement] = useState('right');
+  // const [placement, setPlacement] = useState('right');
 
     useEffect(()  => {
         console.log("Props", props.name)
@@ -23,12 +23,12 @@ export const Stats = (props) => {
     <>
       <Space>
         <StyledButton onClick={showDrawer}>
-          View Stats
+          Stats &nbsp; <i className="fas fa-thermometer"></i> 
         </StyledButton>
       </Space>
       
       <Drawer
-        title="Your stats for the game"
+        title="View your stats below"
         placement={"bottom"}
         width={500}
         onClose={onClose}

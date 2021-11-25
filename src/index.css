@@ -29,20 +29,23 @@ code {
     monospace;
 }
 
+/* Container */
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
-}
-.game-name { grid-area: 1 / 1 / 2 / 4; 
-  background: -webkit-linear-gradient(#fbbd47, #e25822);
-  
+  margin-bottom: -30px;
 }
 
-.ads { grid-area: 2 / 1 / 2 / 4; 
-  
+.game-name { grid-area: 1 / 1 / 2 / 4; 
+  background: -webkit-linear-gradient(#fbbd47, #e25822);
+}
+
+.ads { 
+  grid-area: 2 / 1 / 2 / 4; 
  }
 
 .lives { 
@@ -67,7 +70,8 @@ html, body, .container {
 
 .container * {
   margin: 15px 50px;
-  border: 5px solid #e25822;
+  margin-bottom: -30px;
+  /* border: 5px solid #e25822; */
   padding: 20px;
   color: #fff;
   font-family: Architects Daughter;
@@ -75,23 +79,28 @@ html, body, .container {
   font-weight: 700;
 }
 
+/* Popover */
 
 .ant-popover {
   background-color: #e25822 !important; 
   height: 550px !important;
 }
 
+.ant-timeline-item-content {
+  color: #fbbd47 !important;
+}
+
 .ant-popover-title {
   background-color: #e25822 !important; 
   text-align: center !important;
-  color: #fff !important;
+  color: #fbbd47 !important;
   font-size: 15px !important;
 }
 
 .ant-popover-inner-content {
   background-color: #e25822 !important; 
   text-align: center !important;
-  color: #fff !important;
+  color: #fbbd47 !important;
   font-size: 15px !important;
 }
 
@@ -104,12 +113,10 @@ html, body, .container {
 
 .ant-modal-header {
   background-color: #fbbd47 !important;
-  
 }
 
 .ant-modal-title {
   color: #e25822 !important;
-  
 }
 
 .ant-modal-body {
@@ -119,9 +126,14 @@ html, body, .container {
 .ant-modal-footer { 
   background-color: #fbbd47 !important;
 }
+
 .ant-btn {
   background-color: #e25822 !important;
   color: #fff !important; 
+}
+
+.ant-modal-centered {
+  border: 5px solid #fbbd47 !important;
 }
 
 /* Cards */
@@ -201,3 +213,81 @@ html, body, .container {
   }
 }
 
+/* Drawer */
+
+.ant-drawer-header {
+  background-color: #e25822 !important; 
+  text-align: center !important;
+  color: #fbbd47 !important;
+  font-size: 15px !important;
+}
+
+.ant-drawer-title {
+  /* color: #fbbd47 !important;  */
+  color: #fbbd47 !important;
+  font-family: 'Source Sans Pro', sans-serif !important;
+  font-size: 28px !important; 
+  font-weight: 400 !important;
+  line-height: 32px !important;
+}
+
+.ant-drawer-body {
+  background-color: #fbbd47 !important; 
+  text-align: center !important;
+  color: #e25822 !important;
+  font-size: 15px !important;
+}
+
+.ant-drawer-close {
+  top: 5px !important
+}
+
+
+/* Page */
+
+.flex-row-container {
+  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 70px 45px;
+  position: relative;
+}
+.flex-row-container > .flex-row-item {
+  flex: 40%; /* or - flex: 0 50% - or - flex-basis: 50% - */
+  box-shadow: 0 0 0 1px black;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  height: 200px;
+}
+
+.flex-row-item {
+background-color: #f76707;
+border: 1px solid #fbbd47;
+border-radius: 10px;
+}
+
+.flex-row-container > .flex-row-item-one {
+  flex: 100%;
+  background-color: #f76707;
+  border: 1px solid #fbbd47;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px black;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  height: 50px;
+}
+
+/* Popover */
+.ant-popover {
+  background-color: transparent !important;
+}
+
+.ant-popover-message > .anticon {
+  right: 90px !important;
+}
+
+.ant-popover-message-title {
+  color: #fbbd47 !important;
+}

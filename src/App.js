@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { StyledButton, StyledSubPar } from './styles/styles';
+import { StyledButton, StyledSubPar, StyledAdInfo, StyledContent, StyledHeader, StyledName, StyledHeading } from './styles/styles';
 import { startGame, getMessagesForGame, solveMessage} from './services/gameService'
 import { Welcome } from './pages/Welcome';
 import { Modal, Button, message } from 'antd';
@@ -9,7 +9,9 @@ import { Instructions } from './components/Instructions/Instructions';
 import { Shop } from './components/Shop/Shop';
 import styled from 'styled-components';
 import Confetti from 'react-confetti';
-import { Badge, Popconfirm } from 'antd';
+import { Badge, Popconfirm, Statistic } from 'antd';
+
+const { Countdown } = Statistic;
 
 // const PageLayout = styled.div`
 //     background: #aaa;
@@ -52,6 +54,7 @@ const App = () => {
       const { data} = await getMessagesForGame(gameData.gameId)
       if(data) {
         setGameMessages(data);
+        console.log('NOW', data)
       }
     }
     
@@ -68,7 +71,9 @@ const App = () => {
       setLives(lives + data.lives);
       setGold(gold + data.gold)
     }
-    console.log(data);
+    gameMessages.filter(message => message.adId !== adId);
+    console.log('this id: ', adId)
+    console.log(gameMessages);
   }
 
   // const getItemsInShopApi = async () => {
@@ -121,41 +126,46 @@ const App = () => {
             </Popconfirm>            
           </div>
           <div className="flex-row-item" style={{background: '#fbbd47'}}> <Shop gameId={gameData.gameId} gold={gold} style={{width: '150px', textAlign: 'center', margin: 'auto'}}> <i  class="fas fa-shopping-cart"></i>  </Shop>  </div>
-          <div className="flex-row-item-one game-name"> <StyledSubPar style={{mixBlendMode: 'difference', top: '40px'}}> Solve Ads Below </StyledSubPar>  </div>
+          <div className="flex-row-item-one game-name"> <StyledSubPar style={{mixBlendMode: 'difference', top: '40px'}}> Take on Challenges Below </StyledSubPar>  </div>
           {gameMessages.map((message) => {
               return (               
-                  <div key={message.adId} className="flex-row-item"> 
+                  <div key={message.adId} className="flex-row-item" style={{height: '250px'}}> 
                   {message.reward < 20 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
                   {message.reward > 20 && message.reward < 40 ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
                   {message.reward > 40 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
-                    <p style={{marginTop: '2px'}}> {message.adId} </p>                                                            
-                    <p className="card__apply">
-                      Challenge: {message.message}
-                      <br/>
-                      Probability: {message.probability}
-                      <br/>
-                      Reward: <span style={{fontWeight: 'bolder'}}> {message.reward} {message.reward > 30 ? '👍'	: '👎'} </span>
-                      <br/>
-                      Expires in: {message.expires}
-
-                      {/* <a className="card__link" href="#">Apply Now <i className="fas fa-arrow-right"></i></a> */}
-                    </p>
-                    <Button onClick={() => solveMessageApi(message.adId)} style={{marginTop: '2px'}}> Solve this add </Button>
+                    <StyledHeader style={{marginTop: '2px'}}> {message.adId} </StyledHeader>                              
+                      <StyledAdInfo> {message.message} </StyledAdInfo>
+                      
+                      <div style={{display: 'flex', justifyContent: 'center', margin: '-12px 0'}}>
+                        <div style={{padding: '5px', marginRight: '5px'}}>
+                          <StyledAdInfo> Probability: <span style={{fontWeight: 'bolder'}}> {message.probability} </span> </StyledAdInfo>
+                        </div>
+                        <div style={{padding: '5px'}}>
+                          <StyledAdInfo> Reward:  <span style={{fontWeight: 'bolder'}}> {message.reward}  {message.reward > 30 ? '👍🏽'	: '👎🏽'} </span> </StyledAdInfo>
+                        </div>
+                      </div>                      
+                      <hr  style={{borderColor: '#fbbd47'}} />
+                    <Button onClick={() => solveMessageApi(message.adId)} style={{marginTop: '2px'}}> Solve this add  </Button>
+                    <Countdown style={{position: 'relative', right: '-170px', top: '-15px', fontSize: '2px !important', color: '#e25822 !important'}} value={Date.now() + message.expiresIn * 1000} format={'ss'}  />                                                          
                     
                   </div>                         
                 ) 
             })}          
         </div>
 
-        <Modal title="Result 🔥" visible={isModalVisible} onOk={handleOk} centered onCancel={handleCancel}>
+        <Modal transitionName="" maskTransitionName="" title="Challenge Result" visible={isModalVisible} onOk={handleOk} centered
+          footer={[
+            <Button style={{border: '1px solid #e25822'}} onClick={handleOk}> Ok </Button>
+          ]}
+        >
           {adsToSolve ?
             <>
-              <h1> {adsToSolve.success ? <Confetti numberOfPieces={150} width={500} height={700}/>  : 'Challenge failed'}  </h1>
-              <h2 >{adsToSolve.message}</h2>
-              <p> Current score: {adsToSolve.score} </p>
-              <p> Current gold: {adsToSolve.gold} </p>
-              <p> Current highscore: {adsToSolve.highscore} </p>
-              <p> You have: {adsToSolve.lives} </p>
+              <h1> {adsToSolve.success ? <Confetti numberOfPieces={150} width={500} height={700}/> : 'Challenge failed'}  </h1>
+              <StyledHeader style={{fontSize: '30px', textAlign: 'center'}}>{adsToSolve.message}</StyledHeader>
+              <StyledAdInfo> Your score is {adsToSolve.score} </StyledAdInfo>
+              <StyledAdInfo> Your highscore is {adsToSolve.highscore} </StyledAdInfo>
+              <StyledAdInfo> You have {adsToSolve.gold} gold! </StyledAdInfo>            
+              <StyledAdInfo> You have {adsToSolve.lives} lives </StyledAdInfo>
             </>
               : null                    
           }

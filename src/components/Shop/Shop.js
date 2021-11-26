@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import { Drawer, Button, Space, message } from 'antd';
 import { getItemsInShop, purchaseItem } from '../../services/gameService';
-import { StyledButton } from '../../styles/styles';
+import { StyledActionButton,
+         StyledName,
+         StyledContent,
+         StyledButton
+        } from '../../styles/styles';
 import styled from 'styled-components';
 
 const DrawerLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid red;
+  /* border-right: 1px solid red;
+  border-left: 1px solid red; */
   margin-top: 10px;
+  
 `;
 
 const DrawerContent = styled.div`
@@ -17,8 +23,13 @@ const DrawerContent = styled.div`
   height: 200px;
   margin: 10px;
   padding: 10px;
-  border: 1px solid red;
-`;  
+  border-left: 5px solid #e25822;
+  /* border-radius: 5px; */
+
+  &:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  }
+`;
 
 export const Shop = (props) => {
   const [visible, setVisible] = useState(false);
@@ -78,12 +89,13 @@ export const Shop = (props) => {
         <DrawerLayout>
           {itemsInShop.map((item) => {
             return(
-            <DrawerContent key={item.id}>               
-              <h2 style={{color: '#f76707', fontSize: '20px'}}> {item.name} </h2>
-              <p> {item.id} </p>
-              <hr />
-              <p> Cost: {item.cost} </p>
-              <Button onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </Button>
+            <DrawerContent key={item.id}>   
+            <StyledName> {item.name} </StyledName>            
+              {/* <h2 style={{color: '#f76707', fontSize: '20px'}}> {item.name} </h2> */}
+              {/* <StyledShopItemsContent> {item.id} </StyledShopItemsContent> */}
+              <hr className="divider" />
+              <StyledContent> Cost: {item.cost} </StyledContent>
+              <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </StyledActionButton>
 
             </DrawerContent>
             )

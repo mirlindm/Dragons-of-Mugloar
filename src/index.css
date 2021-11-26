@@ -223,12 +223,17 @@ html, body, .container {
 }
 
 .ant-drawer-title {
-  /* color: #fbbd47 !important;  */
   color: #fbbd47 !important;
-  font-family: 'Source Sans Pro', sans-serif !important;
   font-size: 28px !important; 
   font-weight: 400 !important;
-  line-height: 32px !important;
+
+  font-weight: bold !important;
+  font-family: 'Architects Daughter', cursive !important;
+  
+  margin-bottom: 5px !important; 
+  position: relative !important;
+  z-index: 10 !important;
+  padding: 5px !important;    
 }
 
 .ant-drawer-body {
@@ -236,10 +241,33 @@ html, body, .container {
   text-align: center !important;
   color: #e25822 !important;
   font-size: 15px !important;
+  border-radius: 5px !important;
 }
 
 .ant-drawer-close {
-  top: 5px !important
+  top: 5px !important;
+  right: -5px !important;
+}
+
+/* Divider */
+.divider {
+  overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: #e25822;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+
+.divider::before {
+  display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: #e25822;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
 }
 
 
@@ -261,6 +289,11 @@ html, body, .container {
   margin-right: 10px;
   height: 200px;
 }
+
+/* .flex-row-container > .flex-row-item:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  color: 0 0 3px #f76707;
+}  */
 
 .flex-row-item {
 background-color: #f76707;
@@ -290,4 +323,55 @@ border-radius: 10px;
 
 .ant-popover-message-title {
   color: #fbbd47 !important;
+}
+
+.ant-popover-buttons button {
+  border: 1px solid;
+}
+
+.ant-popover-buttons button:hover {
+  border: 1px solid #fbbd47;
+}
+
+/* Messages */
+.ant-message-notice-content {
+  /* background: #fbbd47 !important; */
+
+}
+
+.ant-message-notice-content::after {
+  content: '🐉';
+  
+}
+/* .ant-message-notice-content::after {
+  content:url('./assets/dr.png'); 
+  width: 10px !important;
+  height: 10px !important;
+  position:relative; /*or absolute*/
+  /* z-index:100000;  */
+  /* left:-50px; */
+  /* top:10px; */
+/* } */ 
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e25822; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #e25822; 
 }

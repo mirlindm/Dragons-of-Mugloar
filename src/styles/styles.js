@@ -96,3 +96,72 @@ export const StyledButton = styled(Button)`
     }
 `;
 
+export const StyledName = styled.p`    
+    font-weight: bold;
+    font-size: 25px; 
+    font-family: Architects Daughter, cursive;
+    background: -webkit-linear-gradient(#e25822, #e25822);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 10;
+    padding: 5px;    
+`;
+
+export const StyledHeader = styled.p`    
+    font-weight: bold;
+    font-size: 20px; 
+    font-family: Architects Daughter, cursive;
+    background: -webkit-linear-gradient(#fbbd47, #fbbd47);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 10;
+    padding: 5px;    
+    margin-top: -10px;
+`;
+
+export const StyledContent = styled.p`    
+    font-weight: bold;
+    font-size: 20px; 
+    font-family: Architects Daughter, cursive;
+    background: -webkit-linear-gradient(#e25822, #e25822);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 10;
+    padding: 5px;    
+    margin-top: -10px;
+    text-align: center;
+`;
+
+export const StyledAdInfo = styled.p`    
+    font-weight: bold;
+    font-size: 15px; 
+    /* font-family: Architects Daughter, cursive; */
+    background: #fbbd47;
+    z-index: 10;
+    padding: 5px;    
+    text-align: center;
+    margin: 15px 0;
+`;
+
+export const StyledActionButton = styled(Button)`    
+    width: 100px;
+    height: 40px;
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    margin-top: -10px;
+    color: #ffffff;
+    font-family: Architects Daughter, cursive;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #e25822;
+    
+`;

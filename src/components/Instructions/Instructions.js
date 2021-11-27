@@ -1,7 +1,15 @@
 import React from 'react';
 import { Timeline, Popover } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { StyledSubPar } from '../../styles/styles';
+import { StyledParagraph } from '../../styles/styles';
+import styled from 'styled-components';
+
+const StyledLayout = styled.div`
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 10%;
+`;
 
 export const Instructions = () => {
 
@@ -13,19 +21,18 @@ export const Instructions = () => {
         View Stats (score, lives &amp; gold)
       </Timeline.Item>
       <Timeline.Item color="red">Solve Challenges</Timeline.Item>
-      <Timeline.Item color="red"> Purchase items, as needed </Timeline.Item>
+      <Timeline.Item color="red"> Purchase items in the shop </Timeline.Item>
       <Timeline.Item color="red">Make sure to score higher than 1000!</Timeline.Item>
     </Timeline>
-  ) 
+  ); 
 
   return (
-    <div style={{position: 'absolute', left: '20%', right: '20%', bottom: '10%'}}>   
+    <StyledLayout>   
       <Popover content={gameInstructions} placement="bottom" title="How to play the game?" trigger="hover">
-        <StyledSubPar>Find Game Instructions</StyledSubPar>
+        <StyledParagraph>Find Game Instructions</StyledParagraph>
       </Popover>
-    </div>
-
-  )
+    </StyledLayout>
+  );
 }
   
   

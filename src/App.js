@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
-import { StyledButton, StyledSubPar, StyledAdInfo, StyledContent, StyledHeader, StyledName, StyledHeading } from './styles/styles';
+import { StyledButton, StyledParagraph, StyledAdInfo, StyledHeader } from './styles/styles';
 import { startGame, getMessagesForGame, solveMessage} from './services/gameService'
 import { Welcome } from './pages/Welcome';
 import { Modal, Button, message } from 'antd';
@@ -93,12 +92,12 @@ const App = () => {
     setIsModalVisible(false);
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  // const handleCancel = () => {
+  //   setIsModalVisible(false);
+  // };
 
   return (
-    <div className="App">
+    <div>
       {!gameStarted && 
       <>
         <Welcome />
@@ -126,7 +125,7 @@ const App = () => {
             </Popconfirm>            
           </div>
           <div className="flex-row-item" style={{background: '#fbbd47'}}> <Shop gameId={gameData.gameId} gold={gold} style={{width: '150px', textAlign: 'center', margin: 'auto'}}> <i  class="fas fa-shopping-cart"></i>  </Shop>  </div>
-          <div className="flex-row-item-one game-name"> <StyledSubPar style={{mixBlendMode: 'difference', top: '40px'}}> Take on Challenges Below </StyledSubPar>  </div>
+          <div className="flex-row-item-one game-name"> <StyledParagraph style={{mixBlendMode: 'difference', top: '40px'}}> Take on Challenges Below </StyledParagraph>  </div>
           {gameMessages.map((message) => {
               return (               
                   <div key={message.adId} className="flex-row-item" style={{height: '250px'}}> 

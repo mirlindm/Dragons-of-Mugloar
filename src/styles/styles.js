@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { Button } from 'antd';
 
+var fireyDragonColor = '#e25822';
+var goldIshColor = '#fbbd47';
+
 export const StyledHeading = styled.h1`
     font-size: 130px;
     font-weight: bolder;    
-    background: -webkit-linear-gradient(#fbbd47, #e25822);
+    background: -webkit-linear-gradient(${goldIshColor}, ${fireyDragonColor});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: Architects Daughter, cursive;
@@ -18,11 +21,11 @@ export const StyledHeading = styled.h1`
     }
 `;
 
-export const StyledSubPar = styled.p`    
+export const StyledParagraph = styled.p`    
     font-weight: bold;
     font-size: 25px; 
     font-family: Architects Daughter, cursive;
-    background: -webkit-linear-gradient(#e25822, #fbbd47);
+    background: -webkit-linear-gradient(${fireyDragonColor}, ${goldIshColor});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
@@ -46,7 +49,7 @@ export const StyledButton = styled(Button)`
     font-size: 36px;
     text-align: center;
     text-decoration: none;
-    background-color: #e25822;
+    background-color: ${fireyDragonColor};
     padding: 20px 40px;
 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -63,7 +66,7 @@ export const StyledButton = styled(Button)`
 
     &:active {
         top:10px;
-        background-color:#e25822 !important;
+        background-color: ${fireyDragonColor} !important;
     
         -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
         -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
@@ -86,12 +89,12 @@ export const StyledButton = styled(Button)`
     }
 
     &:hover {
-        background-color: #e25822;;
+        background-color: ${fireyDragonColor};;
         color: #fff;
     }
 
     &:focus {
-        background-color: #e25822;;
+        background-color: ${fireyDragonColor};;
         color: #fff;
     }
 `;
@@ -100,7 +103,7 @@ export const StyledName = styled.p`
     font-weight: bold;
     font-size: 25px; 
     font-family: Architects Daughter, cursive;
-    background: -webkit-linear-gradient(#e25822, #e25822);
+    background: -webkit-linear-gradient(${fireyDragonColor}, ${fireyDragonColor});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
@@ -113,7 +116,7 @@ export const StyledHeader = styled.p`
     font-weight: bold;
     font-size: 20px; 
     font-family: Architects Daughter, cursive;
-    background: -webkit-linear-gradient(#fbbd47, #fbbd47);
+    background: -webkit-linear-gradient(${goldIshColor}, ${goldIshColor});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
@@ -127,7 +130,7 @@ export const StyledContent = styled.p`
     font-weight: bold;
     font-size: 20px; 
     font-family: Architects Daughter, cursive;
-    background: -webkit-linear-gradient(#e25822, #e25822);
+    background: -webkit-linear-gradient(${fireyDragonColor}, ${fireyDragonColor});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
@@ -140,9 +143,8 @@ export const StyledContent = styled.p`
 
 export const StyledAdInfo = styled.p`    
     font-weight: bold;
-    font-size: 15px; 
-    /* font-family: Architects Daughter, cursive; */
-    background: #fbbd47;
+    font-size: 15px;     
+    background: ${goldIshColor};
     z-index: 10;
     padding: 5px;    
     text-align: center;
@@ -162,6 +164,5 @@ export const StyledActionButton = styled(Button)`
     font-size: 15px;
     text-align: center;
     text-decoration: none;
-    background-color: #e25822;
-    
+    background-color: ${fireyDragonColor}; 
 `;

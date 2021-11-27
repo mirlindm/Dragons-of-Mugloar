@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledHeading, StyledSubPar } from '../styles/styles';
+import { StyledHeading, StyledParagraph } from '../styles/styles';
 
 export const Welcome = () => {
     return (
@@ -8,9 +8,9 @@ export const Welcome = () => {
                 Dragons of Mugolar
             </StyledHeading> 
             
-            <StyledSubPar>
+            <StyledParagraph>
                 Hit Start to Play
-            </StyledSubPar>
+            </StyledParagraph>
         </div>
     )
 }

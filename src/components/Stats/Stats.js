@@ -5,7 +5,6 @@ import { StyledButton } from '../../styles/styles';
 
 export const Stats = (props) => {
   const [visible, setVisible] = useState(false);
-  // const [placement, setPlacement] = useState('right');
 
     useEffect(()  => {
         console.log("Props", props.name)

@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { Button } from 'antd';
 
-var fireyDragonColor = '#e25822';
-var goldIshColor = '#fbbd47';
+export var fireyDragonColor = '#e25822';
+export var goldIshColor = '#fbbd47';
 
 export const StyledHeading = styled.h1`
     font-size: 130px;
     font-weight: bolder;    
     background: -webkit-linear-gradient(${goldIshColor}, ${fireyDragonColor});
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: Architects Daughter, cursive;
     position: relative;
@@ -27,6 +28,7 @@ export const StyledParagraph = styled.p`
     font-family: Architects Daughter, cursive;
     background: -webkit-linear-gradient(${fireyDragonColor}, ${goldIshColor});
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
     margin-top: -40px;
@@ -91,6 +93,7 @@ export const StyledButton = styled(Button)`
     &:hover {
         background-color: ${fireyDragonColor};;
         color: #fff;
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
     }
 
     &:focus {
@@ -105,6 +108,7 @@ export const StyledName = styled.p`
     font-family: Architects Daughter, cursive;
     background: -webkit-linear-gradient(${fireyDragonColor}, ${fireyDragonColor});
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
     position: relative;
@@ -118,6 +122,7 @@ export const StyledHeader = styled.p`
     font-family: Architects Daughter, cursive;
     background: -webkit-linear-gradient(${goldIshColor}, ${goldIshColor});
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
     position: relative;
@@ -132,6 +137,7 @@ export const StyledContent = styled.p`
     font-family: Architects Daughter, cursive;
     background: -webkit-linear-gradient(${fireyDragonColor}, ${fireyDragonColor});
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
     position: relative;

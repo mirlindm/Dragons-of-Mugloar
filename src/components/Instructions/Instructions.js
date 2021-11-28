@@ -28,7 +28,7 @@ export const Instructions = () => {
 
   return (
     <StyledLayout>   
-      <Popover content={gameInstructions} placement="bottom" title="How to play the game?" trigger="hover">
+      <Popover content={gameInstructions} placement="bottom" title="How to play the game?" trigger="click">
         <StyledParagraph>Find Game Instructions</StyledParagraph>
       </Popover>
     </StyledLayout>

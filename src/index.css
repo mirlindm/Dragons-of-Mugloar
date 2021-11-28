@@ -40,14 +40,14 @@ code {
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr; */
   gap: 0px 0px;
   grid-auto-flow: row;
   margin-bottom: -30px;
 }
 
-.game-name { grid-area: 1 / 1 / 2 / 4; 
+.game-name { 
   background: -webkit-linear-gradient(var(--goldColorCode), var(--dragonColorCode));
 }
 
@@ -114,7 +114,6 @@ html, body, .container {
 .ant-popover-arrow-content {
   background-color: var(--dragonColorCode) !important; 
 }
-
 
 /* Modal */
 
@@ -257,6 +256,7 @@ html, body, .container {
 }
 
 /* Divider */
+
 .divider {
   overflow: visible; /* For IE */
     height: 30px;
@@ -280,21 +280,27 @@ html, body, .container {
 
 /* Page */
 
-.flex-row-container {
-  
+.flex-row-container {  
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 70px 45px;
+  margin: 10px 45px;
   position: relative;
 }
+
+@media only screen and (max-width: 600px) {
+  .flex-row-container {
+    flex-direction: column;
+  }
+}
+
 .flex-row-container > .flex-row-item {
   flex: 40%; /* or - flex: 0 50% - or - flex-basis: 50% - */
-  box-shadow: 0 0 0 1px black;
+
   margin-bottom: 10px;
   margin-right: 10px;
-  height: 200px;
+  height: 150px;
 }
 
 /* .flex-row-container > .flex-row-item:hover {
@@ -341,11 +347,6 @@ border-radius: 10px;
 }
 
 /* Messages */
-.ant-message-notice-content {
-  /* background: var(--goldColorCode) !important; */
-
-}
-
 .ant-message-notice-content::after {
   content: '🐉';
   
@@ -373,12 +374,19 @@ border-radius: 10px;
 }
  
 /* Handle */
+
 ::-webkit-scrollbar-thumb {
   background: var(--dragonColorCode); 
   border-radius: 10px;
 }
 
 /* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--dragonColorCode); 
+}
+
+/* Instructions Steps Icon */
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
+  background: var(--dragonColorCode) !important; 
 }

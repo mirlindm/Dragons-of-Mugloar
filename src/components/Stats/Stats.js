@@ -1,7 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import { Drawer, Button, Space } from 'antd';
-import { StyledButton } from '../../styles/styles';
+import { fireyDragonColor, goldIshColor } from '../../styles/styles';
+import { Ins } from '../Instructions/Ins';
+import styled from 'styled-components'; 
+
+const StyledInstructionsLabel = styled.div`
+    font-weight: bold;
+    font-size: 25px; 
+    font-family: Architects Daughter, cursive;
+    background: -webkit-linear-gradient(${fireyDragonColor}, ${goldIshColor});
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 10;
+    padding: 5px; 
+    top: 60px;
+    border-bottom: 2px solid orange;
+    cursor: pointer;
+
+    &:hover {  
+      box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+      transform: scale(1.01);
+    }
+`;
 
 export const Stats = (props) => {
   const [visible, setVisible] = useState(false);
@@ -18,12 +43,12 @@ export const Stats = (props) => {
     setVisible(false);
   };
 
-  return (
+   return (
     <>
       <Space>
-        <StyledButton onClick={showDrawer}>
-          Stats &nbsp; <i className="fas fa-thermometer"></i> 
-        </StyledButton>
+        <StyledInstructionsLabel onClick={showDrawer}>
+           Find Game Instructions
+        </StyledInstructionsLabel>
       </Space>
       
       <Drawer
@@ -41,12 +66,7 @@ export const Stats = (props) => {
           </Space>
         }
       >
-       <div className="container"> 
-          <p  className="lives"> {props.lives} lives </p>
-          <p  className="gold"> {props.gold} gold </p>
-          <p  className="score">Your score: {props.score}</p>
-          
-        </div>
+        <Ins />
       </Drawer>
     </>
   );

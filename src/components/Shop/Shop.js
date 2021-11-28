@@ -45,12 +45,12 @@ export const Shop = (props) => {
 
   const purchaseItemApi = async (itemId, itemCost) => {
     if(props.gold < itemCost) {
-      return message.warning("Not enough gold!");
+      return message.warning("Insufficient Gold!");
     }
     const { data } = await purchaseItem(props.gameId, itemId);
     if (data) {
       console.log(data);
-      message.success("Item bought");      
+      message.success("Item Purchased!");      
     } 
   }
 
@@ -67,7 +67,7 @@ export const Shop = (props) => {
       <Space>
         <StyledButton onClick={() => {showDrawer(); getItemsInShopApi()}}>
           Shop &nbsp;
-        <i className="fas fa-shopping-cart"></i>
+          <i className="fas fa-shopping-cart"></i>
         </StyledButton>
       </Space>
       
@@ -89,15 +89,12 @@ export const Shop = (props) => {
         <DrawerLayout>
           {itemsInShop.map((item) => {
             return(
-            <DrawerContent key={item.id}>   
-            <StyledName> {item.name} </StyledName>            
-              {/* <h2 style={{color: '#f76707', fontSize: '20px'}}> {item.name} </h2> */}
-              {/* <StyledShopItemsContent> {item.id} </StyledShopItemsContent> */}
-              <hr className="divider" />
-              <StyledContent> Cost: {item.cost} </StyledContent>
-              <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </StyledActionButton>
-
-            </DrawerContent>
+              <DrawerContent key={item.id}>   
+                <StyledName> {item.name} </StyledName>             
+                <hr className="divider" />
+                <StyledContent> Cost: {item.cost} </StyledContent>
+                <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </StyledActionButton>
+              </DrawerContent>
             )
           })}
         </DrawerLayout>

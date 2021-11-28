@@ -54,11 +54,11 @@ export const Shop = (props) => {
     } 
   }
 
-  const showDrawer = () => {
+  const showDrawer = () => { // func is just delegating call to another func, please consider using setVisible directly
     setVisible(true);
   };
 
-  const onClose = () => {
+  const onClose = () => { // func is just delegating call to another func, please consider using onClose directly
     setVisible(false);
   };
 
@@ -66,7 +66,9 @@ export const Shop = (props) => {
     <>
       <Space>
         <StyledButton onClick={() => {showDrawer(); getItemsInShopApi()}}>
-          Shop &nbsp;
+          Shop &nbsp;{/*// Do not use '&nbsp'. Consider a better approach
+          like here http://zuga.net/articles/css-an-alternative-to-nbsp/,
+           Replace elsewhere in the code too*/} .
         <i className="fas fa-shopping-cart"></i>
         </StyledButton>
       </Space>
@@ -91,11 +93,11 @@ export const Shop = (props) => {
             return(
             <DrawerContent key={item.id}>   
             <StyledName> {item.name} </StyledName>            
-              {/* <h2 style={{color: '#f76707', fontSize: '20px'}}> {item.name} </h2> */}
+              {/* <h2 style={{color: '#f76707', fontSize: '20px'}}> {item.name} </h2> */} {/*Remove unnecessary code*/}
               {/* <StyledShopItemsContent> {item.id} </StyledShopItemsContent> */}
               <hr className="divider" />
               <StyledContent> Cost: {item.cost} </StyledContent>
-              <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </StyledActionButton>
+              <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </StyledActionButton> {/*Make the Dollar sign into a component*/}
 
             </DrawerContent>
             )

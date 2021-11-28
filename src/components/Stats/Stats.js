@@ -7,14 +7,14 @@ export const Stats = (props) => {
   const [visible, setVisible] = useState(false);
 
     useEffect(()  => {
-        console.log("Props", props.name)
+        console.log("Props", props.name) // please remove all Console.log before submitting
     })
 
-  const showDrawer = () => {
+  const showDrawer = () => {// func is just delegating call to another func, please consider using showDrawer directly
     setVisible(true);
   };
 
-  const onClose = () => {
+  const onClose = () => {// func is just delegating call to another func, please consider using onClose directly
     setVisible(false);
   };
 
@@ -41,7 +41,7 @@ export const Stats = (props) => {
           </Space>
         }
       >
-       <div className="container"> 
+       <div className="container"> {/*I recommend making this container and sub p's into separate dedicated component*/}
           <p  className="lives"> {props.lives} lives </p>
           <p  className="gold"> {props.gold} gold </p>
           <p  className="score">Your score: {props.score}</p>

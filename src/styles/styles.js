@@ -4,7 +4,7 @@ import { Button } from 'antd';
 var fireyDragonColor = '#e25822';
 var goldIshColor = '#fbbd47';
 
-export const StyledHeading = styled.h1`
+export const StyledHeading = styled.h1` // verbose styling, consider making it work with less
     font-size: 130px;
     font-weight: bolder;    
     background: -webkit-linear-gradient(${goldIshColor}, ${fireyDragonColor});
@@ -21,7 +21,7 @@ export const StyledHeading = styled.h1`
     }
 `;
 
-export const StyledParagraph = styled.p`    
+export const StyledParagraph = styled.p`    // verbose styling, consider making it work with less
     font-weight: bold;
     font-size: 25px; 
     font-family: Architects Daughter, cursive;
@@ -36,7 +36,7 @@ export const StyledParagraph = styled.p`
     top: 60px;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)` // Very verbose styling, do we need all of these, please use the minimum necessary
     width: 250px;
     height: 80px;
     position: relative;
@@ -112,7 +112,7 @@ export const StyledName = styled.p`
     padding: 5px;    
 `;
 
-export const StyledHeader = styled.p`    
+export const StyledHeader = styled.p` // A similarly named component exists as StyledHeading, please rename it.
     font-weight: bold;
     font-size: 20px; 
     font-family: Architects Daughter, cursive;

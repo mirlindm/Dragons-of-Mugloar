@@ -1,7 +1,8 @@
 import { baseApi } from './baseService';
 
 export const startGame = () => {
-    const endpoint = 'game/start';
+    const endpoint = 'game/start'; // no need for defining const and then using it, use directly,
+                                    // replace elsewhere in the file too
     return baseApi.post(endpoint);
 }
 

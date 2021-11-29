@@ -14,9 +14,9 @@ export const AdsModal = (props) => {
           transitionName="" 
           maskTransitionName="" 
           title="Challenge Result" 
-          visible={props.isModalVisible} onOk={handleOk} 
-          onCancel
+          visible={props.isModalVisible} onOk={handleOk}
           centered
+          closable={false}
           footer={[
             <Button style={{border: `1px solid ${fireyDragonColor}`}} onClick={handleOk}>Ok</Button>
           ]}

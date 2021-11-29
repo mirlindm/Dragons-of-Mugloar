@@ -3,15 +3,16 @@ import { StyledButton,
          StyledParagraph,
          StyledAdInfo,
          StyledHeader,
-        goldIshColor, 
-        StyledActionButton } from './styles/styles';
+         goldIshColor, 
+         StyledActionButton 
+        } from './styles/styles';
 import { startGame, getMessagesForGame, solveMessage } from './services/gameService'
-import { Welcome } from './pages/Welcome';
-import { Stats } from './pages/Stats';
+import { Welcome } from './pages/HomePage/Welcome';
+import { Stats } from './pages/GameStats/Stats';
 import { message } from 'antd';
-import { InstructionsDrawer } from './components/Instructions/InstructionsDrawer';
-import { Shop } from './components/Shop/Shop';
-import { Badge, Popconfirm } from 'antd';
+import { InstructionsDrawer } from './pages/Instructions/InstructionsDrawer';
+// import { Shop } from './pages/Shop/Shop';
+import { Badge } from 'antd';
 import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
 import { Buttons } from './components/Buttons/Buttons';
 import { AdsModal } from './components/Modal/AdsModal';
@@ -31,6 +32,7 @@ const App = () => {
 
   const startGameApi = async () => {
     const { data }  = await startGame();
+    console.log("game started: ", data)
     setGameData(data);
     setGameStarted(true);
     setScore(data.score);
@@ -41,7 +43,7 @@ const App = () => {
   useEffect(() => {
 
     // const getMessagesForGameApi = async () => {
-    //   await getMessagesForGame(gameData.gameId)
+    //   await getMessagesForGame(gameData.gameId);
     //   .then(response => {
     //     setGameMessages(response.data); 
     //     console.log(response.data);
@@ -77,6 +79,7 @@ const App = () => {
   const solveMessageApi = async (adId) => {
     const { data } = await solveMessage(gameData.gameId, adId)
     if(data) {
+      console.log("solved: ", data)
       setAdsToSolve(data);
       setIsModalVisible(true);
     }
@@ -84,23 +87,18 @@ const App = () => {
     if(data.success) {
       setScore(data.score);
       setLives(data.lives);
-      setGold(data.gold);
-      getMessagesForGameApi();
+      setGold(data.gold);      
     } else {
       setScore(data.score);
       setLives(data.lives);
-      setGold(data.gold);     
-      getMessagesForGameApi(); 
+      setGold(data.gold);
     }
+    getMessagesForGameApi();
 
     if(lives === 0 || data.lives === 0) {
       message.warning('Game Over. New Game Will begin shortly');
       startGameApi();
     }
-  }
-
-  const confirm = () =>  {
-    startGameApi();
   }
 
   return (
@@ -115,24 +113,10 @@ const App = () => {
 
       {gameStarted &&
       <div>
-        <Stats gameId={gameData} score={score} gold={gold} lives={lives} />  
-        
-        {/* Remove or keep the Buttons Component below */}
-        <Buttons />
+        <Stats gameId={gameData} score={score} gold={gold} lives={lives} />          
+        <Buttons setGold={setGold} gold={gold} gameId={gameData.gameId} startGameApi={startGameApi} />
 
-        <div className="flex-row-container">                 
-          <div className="flex-row-item" style={{background: 'none', border: 'hidden', marginTop: '-40px'}}> 
-            <Popconfirm placement="rightTop" onConfirm={confirm} title="Play again？" okText="Yes" cancelText="No">
-              <StyledButton> Restart <span style={{marginRight: '30px'}} /> <i style={{marginLeft: '-15px'}} className="fas fa-redo nowrap"> </i> </StyledButton> 
-            </Popconfirm>            
-          </div>
-
-          <div className="flex-row-item" style={{background: 'none', border: 'hidden', marginTop: '-40px'}}> 
-            <Shop gameId={gameData.gameId} gold={gold} style={{width: '150px', textAlign: 'center', margin: 'auto'}}> 
-              <i class="fas fa-shopping-cart"></i> 
-            </Shop> 
-          </div>
-
+        <div className="flex-row-container">
           <div className="flex-row-item-one game-name" style={{marginTop: '30px'}}> 
             <StyledParagraph style={{mixBlendMode: 'difference', top: '40px'}}>Take on Challenges Below</StyledParagraph>
           </div>
@@ -160,16 +144,11 @@ const App = () => {
                         <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>
                       </div>
                   </div>
-
                 </div>
               ); 
             })}          
-        </div>
-
-        {/* Imported Modal Start */}
-        <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />
-        {/* Imported Modal End */}
-        
+        </div>      
+        <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />         
       </div>      
       }  
       {score > 1000 ? message.success("You reached 1K score!") : null}    

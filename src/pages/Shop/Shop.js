@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import 'antd/dist/antd.css';
 import { Drawer, Space, message } from 'antd';
 import { getItemsInShop, purchaseItem } from '../../services/gameService';
 import { StyledActionButton,
@@ -8,12 +7,12 @@ import { StyledActionButton,
          StyledButton
         } from '../../styles/styles';
 import styled from 'styled-components';
+import 'antd/dist/antd.css';
 
 const DrawerLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-  
 `;
 
 const DrawerContent = styled.div`
@@ -45,11 +44,9 @@ export const Shop = (props) => {
       return message.warning("Insufficient Gold!");
     }
     const { data } = await purchaseItem(props.gameId, itemId);
-    if (data) {
-      console.log("item purchased", data);
-      message.success("Item Purchased!");     
-      // props.gold = props.gold - itemCost;
-      // console.log('gold in props', props.gold) 
+    if (data) {    
+      message.success("Item Purchased!");
+      props.setGold(props.gold - itemCost);
     } 
   }
 
@@ -78,8 +75,8 @@ export const Shop = (props) => {
             return(
               <DrawerContent key={item.id}>   
                 <StyledName> {item.name} </StyledName>             
-                <hr className="divider" />
-                <StyledContent> Cost: {item.cost} </StyledContent>
+                 <hr className="divider" />
+                <StyledContent>Cost: {item.cost}</StyledContent>
                 <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}>Purchase</StyledActionButton>
               </DrawerContent>
             )

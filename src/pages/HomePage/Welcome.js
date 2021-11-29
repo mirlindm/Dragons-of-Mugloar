@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledMainHeading, StyledParagraph } from '../styles/styles';
+import { StyledMainHeading, StyledParagraph } from '../../styles/styles';
 
 export const Welcome = () => {
     return (

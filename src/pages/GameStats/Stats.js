@@ -1,5 +1,5 @@
 import React from 'react';
-import { goldIshColor } from '../styles/styles'; 
+import { goldIshColor } from '../../styles/styles'; 
 import styled from 'styled-components';
 
 const StyledStatsValues = styled.span`

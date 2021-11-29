@@ -43,6 +43,9 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 
 ![here](https://github.com/mirlindm/Dragons-of-Mugloar/giphy.gif)
 
+![Untitled](https://user-images.githubusercontent.com/55096560/143934687-8ff8ff91-d4a3-4c73-9849-9d627dd0e4c3.gif)
+
+
 
 ## Frontend Caterpillar Screenshots
 <img alt="Home Page" src="./src/assets/UI_Screenshots/HomePage.png">

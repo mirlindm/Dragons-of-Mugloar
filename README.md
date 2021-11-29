@@ -36,12 +36,12 @@ npm test
 The Kingdom of Mugloar has noticeably changed over the short time of just a few years – it was not long ago when the state officials introduced a skilled dragon trainer to the country’s payroll to train the scaly beasts to protect our lands against invading knights, hungry for royal hands in marriage – princess or miscellaneous. The dragon trainer was successful in fending off the knights and making dragons commonplace in the Mugloarian everyday...
 
 ## Frontend Caterpillar Screenshots
-<img alt="Home Page" src="./src/assets/HomePage.png">
-<img alt="Game Instructions" src="./src/assets/Instructions.png">
-<img alt="Game Stats" src="./src/assets/Stats.png">
-<img alt="Shop" src="./src/assets/Shop.png">
-<img alt="Challenges" src="./src/assets/Challenges.png">
-<img alt="Successful Challenge Solving" src="./src/assets/ChallengeSolved.png">
+<img alt="Home Page" src="./src/assets/UI_Screenshots/HomePage.png">
+<img alt="Game Instructions" src="./src/assets/UI_Screenshots/Instructions.png">
+<img alt="Game Stats" src="./src/assets/UI_Screenshots/Stats.png">
+<img alt="Shop" src="./src/assets/UI_Screenshots/Shop.png">
+<img alt="Challenges" src="./src/assets/UI_Screenshots/Challenges.png">
+<img alt="Successful Challenge Solving" src="./src/assets/UI_Screenshots/ChallengeSolved.png">
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

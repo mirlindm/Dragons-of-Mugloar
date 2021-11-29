@@ -37,7 +37,7 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 
 ## Application GIF
 
-![App Gif](https://github.com/mirlindm/grab/blob/master/grab-landingpage-winnie.gif)
+![App Gif](https://github.com/mirlindm/Dragons-of-Mugloar/tree/main/src/assets/test.gif)
 
 
 ## Frontend Caterpillar Screenshots

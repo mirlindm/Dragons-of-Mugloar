@@ -27,6 +27,10 @@ npm start
 ``` 
 - You will be redirected to the browser, but nevertheless, you might as well navigate to: localhost:3000
 
+- To run the tests, located in: ``` /src/utils/utils.test.js``` , run the commmand:
+```
+npm start
+``` 
 
 ## About the Application
 The Kingdom of Mugloar has noticeably changed over the short time of just a few years – it was not long ago when the state officials introduced a skilled dragon trainer to the country’s payroll to train the scaly beasts to protect our lands against invading knights, hungry for royal hands in marriage – princess or miscellaneous. The dragon trainer was successful in fending off the knights and making dragons commonplace in the Mugloarian everyday...

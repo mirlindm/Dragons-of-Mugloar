@@ -153,8 +153,7 @@ export const StyledAdInfo = styled.p`
     background: ${goldIshColor};
     z-index: 10;
     padding: 5px;    
-    text-align: center;
-    margin: 15px 0;
+    text-align: center;    
 `;
 
 export const StyledActionButton = styled(Button)`    
@@ -171,4 +170,12 @@ export const StyledActionButton = styled(Button)`
     text-align: center;
     text-decoration: none;
     background-color: ${fireyDragonColor}; 
+
+    &:hover {
+        background-color: ${goldIshColor};
+        color: #fff;
+        border-color: ${goldIshColor};
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+    }
+
 `;

@@ -1,44 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledButton,
          StyledParagraph,
          StyledAdInfo,
          StyledHeader,
         fireyDragonColor,
-        goldIshColor } from './styles/styles';
-import { startGame, getMessagesForGame, solveMessage} from './services/gameService'
+        goldIshColor, 
+        StyledActionButton } from './styles/styles';
+import { startGame, getMessagesForGame, solveMessage } from './services/gameService'
 import { Welcome } from './pages/Welcome';
+import { Stats } from './pages/Stats';
 import { Modal, Button, message } from 'antd';
-import { Stats } from './components/Stats/Stats';
+import { InstructionsDrawer } from './components/Instructions/InstructionsDrawer';
 import { Shop } from './components/Shop/Shop';
-import styled from 'styled-components';
 import Confetti from 'react-confetti';
-import { Badge, Popconfirm, Statistic } from 'antd';
-import { sortGameMessagesByReward } from './utils/utils';
-
-const { Countdown } = Statistic;
-
-const StyledStatsValues = styled.span`
-  color: ${goldIshColor}; 
-  display: contents;
-`;
-
-const StyledStatsLabels = styled.p`
-  padding: 20px;
-  color: #fff;
-  font-family: Architects Daughter;
-  font-size: x-large;
-  font-weight: 700;
-`;
+import { Badge, Popconfirm } from 'antd';
+import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
 
 const App = () => {
-  const [gameData, setGameData] = React.useState('');
-  const [gameStarted, setGameStarted] = React.useState(false);
-  const [gameMessages, setGameMessages] = React.useState([]);
-  const [adsToSolve, setAdsToSolve] = React.useState([]);
-  const [score, setScore] = React.useState(0);
-  const [gold, setGold] = React.useState(0);
-  const [lives, setLives] = React.useState(0);
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [gameData, setGameData] = useState('');
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameMessages, setGameMessages] = useState([]);
+  const [adsToSolve, setAdsToSolve] = useState([]);
+  const [score, setScore] = useState(0);
+  const [gold, setGold] = useState(0);
+  const [lives, setLives] = useState(0);
+  // const [maxComputedScore, setMaxComputedScore] = React.useState(0);
+  // const [adScore, setAdScore] = React.useState(0);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const startGameApi = async () => {
     const { data }  = await startGame();
@@ -67,8 +56,12 @@ const App = () => {
     const { data } = await getMessagesForGame(gameData.gameId);
     if(data) {
       console.log('messages for the game:', data);        
-      //setGameMessages(sortGameMessagesByReward(data));   
-      setGameMessages(data.sort(sortGameMessagesByReward));
+      const filteredData = data.filter(message => !message.adId.endsWith('='))
+      setGameMessages(filteredData.sort(sortGameMessagesByReward));
+      // setMaxComputedScore(computeAdScore(filteredData));
+
+      // setGameMessages(data.sort(computeAdScore(score, data.probability, data.reward, data.expiresIn)));
+
       //console.log("after sorting", data.sort((a, b) => (a.reward > b.reward ? 1 : -1)));  
     }
     //gameMessages.sort((firstObject, secondObject) => (firstObject.reward > secondObject.reward) ? 1 : -1);
@@ -93,7 +86,8 @@ const App = () => {
     } else {
       setScore(data.score);
       setLives(data.lives);
-      setGold(data.gold);      
+      setGold(data.gold);     
+      getMessagesForGameApi(); 
     }
 
     if(lives === 0 || data.lives === 0) {
@@ -121,20 +115,17 @@ const App = () => {
         <Welcome />
         <StyledButton onClick={startGameApi}>START</StyledButton>
         <br/>
-        <Stats> Find Game Instructions </Stats>
+        <InstructionsDrawer> Find Game Instructions </InstructionsDrawer>
         {/* <Instructions style={{marginRight: '10px'}} gold={gameData.gold} lives={gameData.lives} score={gameData.score} />         */}
       </div>
       }
 
       {gameStarted &&
       <div>
-        <h2 className="flex-row-item-one game-name" style={{height: '70px', margin: '10px 50px 0 40px', borderRadius: '10px'}}> <StyledStatsLabels> Game <StyledStatsValues> {gameData.gameId} </StyledStatsValues> has started! </StyledStatsLabels> </h2>
+        <Stats gameId={gameData} score={score} gold={gold} lives={lives} />  
         
         <div className="flex-row-container">                 
-          <StyledStatsLabels style={{flex: '1 0 25%',  height: '80px'}} className="flex-row-item"> Lives: <StyledStatsValues> {lives} </StyledStatsValues> </StyledStatsLabels>
-          <StyledStatsLabels style={{flex: '1 0 25%',  height: '80px'}} className="flex-row-item"> Gold: <StyledStatsValues> {gold} </StyledStatsValues> </StyledStatsLabels>
-          <StyledStatsLabels style={{flex: '1 0 25%',  height: '80px'}} className="flex-row-item"> Score: <StyledStatsValues> {score} </StyledStatsValues> </StyledStatsLabels>
-
+      
           <div className="flex-row-item" style={{background: 'none', border: 'hidden', marginTop: '-40px'}}> 
             <Popconfirm placement="rightTop" onConfirm={confirm} title="Play again？" okText="Yes" cancelText="No">
               <StyledButton> Restart &nbsp; <i style={{marginLeft: '-15px'}} className="fas fa-redo"> </i> </StyledButton> 
@@ -154,29 +145,32 @@ const App = () => {
           {gameMessages.map(message => {
             return (               
               
-                <div key={message.adId} className="flex-row-item" style={{height: '250px'}}> 
-                  {message.reward < 20 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
-                  {message.reward > 20 && message.reward < 40 ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
-                  {message.reward > 40 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
-                  {message.reward > 100 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                    
+                <div key={message.adId} className="flex-row-item" style={{height: '300px'}}> 
+                {console.log("Ad computed score:", computeAdScore(message))}
+                  {computeAdScore(message) < 2 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
+                  {computeAdScore(message) >= 2 && computeAdScore(message) < 3  ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
+                  {computeAdScore(message) > 40 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
+                  {computeAdScore(message) > 100 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                    
                     
                   <StyledHeader style={{marginTop: '2px'}}> {message.adId} </StyledHeader>                              
                   <StyledAdInfo> {message.message} </StyledAdInfo>
                       
-                  <div style={{display: 'flex', justifyContent: 'center', margin: '-12px 0'}}>
-                      <div style={{padding: '5px', marginRight: '5px'}}>
+                  <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', }}>
+                      <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Probability: <span style={{fontWeight: 'bolder'}}> {message.probability} </span> </StyledAdInfo>
                       </div>
-                      <div style={{padding: '5px', position: 'relative', left: '100px'}}>
+
+                      <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {message.reward}  {message.reward > 30 ? '👍🏽'	: '👎🏽'} </span> </StyledAdInfo>
                       </div>
-                      <br/>
-                      <div style={{position: 'relative', top: '75px', right: '140px'}}>
-                        <hr style={{borderColor: `${goldIshColor}`}} />                    
-                        <Button onClick={() => solveMessageApi(message.adId)} style={{marginTop: '2px'}}> Solve this add </Button>
+                      <div style={{position: 'relative', top: '10px'}}>
+                      <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>
                       </div>
-
                       
+                      {/* <div style={{position: 'relative', top: '75px', right: '140px'}}> */}
+                        {/* <hr style={{borderColor: `${goldIshColor}`}} />                     */}
+                        
+                      {/* </div> */}
                   </div>                      
                     
 

@@ -39,7 +39,7 @@ export const Shop = (props) => {
     const { data } = await getItemsInShop(props.gameId);
     if(data) {
       setItemsInShop(data);
-      console.log("here", data);
+      console.log("items in shop", data);
     }
   }
 
@@ -49,14 +49,12 @@ export const Shop = (props) => {
     }
     const { data } = await purchaseItem(props.gameId, itemId);
     if (data) {
-      console.log(data);
-      message.success("Item Purchased!");      
+      console.log("item purchased", data);
+      message.success("Item Purchased!");     
+      // props.gold = props.gold - itemCost;
+      // console.log('gold in props', props.gold) 
     } 
   }
-
-  const showDrawer = () => {
-    setVisible(true);
-  };
 
   const onClose = () => {
     setVisible(false);
@@ -65,7 +63,7 @@ export const Shop = (props) => {
   return (
     <>
       <Space>
-        <StyledButton onClick={() => {showDrawer(); getItemsInShopApi()}}>
+        <StyledButton onClick={() => {setVisible(true); getItemsInShopApi()}}>
           Shop &nbsp;
           <i className="fas fa-shopping-cart"></i>
         </StyledButton>
@@ -77,14 +75,6 @@ export const Shop = (props) => {
         width={500}
         onClose={onClose}
         visible={visible}
-        extra={
-          <Space>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button>
-          </Space>
-        }
       >
         <DrawerLayout>
           {itemsInShop.map((item) => {
@@ -93,7 +83,7 @@ export const Shop = (props) => {
                 <StyledName> {item.name} </StyledName>             
                 <hr className="divider" />
                 <StyledContent> Cost: {item.cost} </StyledContent>
-                <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}> Buy 💰 </StyledActionButton>
+                <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}>Purchase</StyledActionButton>
               </DrawerContent>
             )
           })}

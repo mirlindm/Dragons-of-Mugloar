@@ -1,0 +1,13 @@
+TODO:
+********************************************************8
+1. Implement shopping (purchase item and gold goes deducted) * DONE HALF *
+2. Try to extract code into separate components (REDUX) * DONE HALF *
+http://musttoknow.com/react-js-change-props-value-child-component/
+3. Refactor Components vs Pages (instructions ... ) * DONE *
+4. Improve the Cards for messages * DONE *
+********************************************************8
+
+1. Compute and store score for each add
+2. Compute the max score from all ads
+3. Normalize score for each add (adScore/maxScore)
+4. Display badges according to the normalized Score

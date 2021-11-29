@@ -1,28 +1,23 @@
 import { baseApi } from './baseService';
 
 export const startGame = () => {
-    const endpoint = 'game/start';
-    return baseApi.post(endpoint);
+    return baseApi.post('game/start');
 }
 
 export const getMessagesForGame = (gameId) => {
-    const endpoint = `${gameId}/messages`;
-    return baseApi.get(endpoint);
+    return baseApi.get(`${gameId}/messages`);
 }
 
 export const solveMessage = (gameId, adId) => {
-    const endpoint = `${gameId}/solve/${adId}`;
-    return baseApi.post(endpoint);
+    return baseApi.post(`${gameId}/solve/${adId}`);
 } 
 
 export const getItemsInShop = (gameId) => {
-    const url = `${gameId}/shop`;
-    return baseApi.get(url);
+    return baseApi.get(`${gameId}/shop`);
 } 
 
 export const purchaseItem = (gameId, itemId) => {
-    const url = `${gameId}/shop/buy/${itemId}`;
-    return baseApi.post(url);
+    return baseApi.post(`${gameId}/shop/buy/${itemId}`);
 }
 
 

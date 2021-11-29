@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import 'antd/dist/antd.css';
-import { Drawer, Button, Space } from 'antd';
+import React, { useState } from 'react';
+import { Drawer, Space } from 'antd';
 import { fireyDragonColor, goldIshColor } from '../../styles/styles';
-import { Ins } from '../Instructions/Ins';
+import { Instructions } from './Instructions';
 import styled from 'styled-components'; 
+import 'antd/dist/antd.css';
 
 const StyledInstructionsLabel = styled.div`
     font-weight: bold;
@@ -12,13 +12,11 @@ const StyledInstructionsLabel = styled.div`
     background: -webkit-linear-gradient(${fireyDragonColor}, ${goldIshColor});
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 5px;
-    margin-top: 50px;
+    -webkit-text-fill-color: transparent; 
     position: relative;
     z-index: 10;
     padding: 5px; 
-    top: 60px;
+    top: 300px;
     border-bottom: 2px solid orange;
     cursor: pointer;
 
@@ -28,12 +26,8 @@ const StyledInstructionsLabel = styled.div`
     }
 `;
 
-export const Stats = (props) => {
+export const InstructionsDrawer = (props) => {
   const [visible, setVisible] = useState(false);
-
-    useEffect(()  => {
-        console.log("Props", props.name)
-    })
 
   const showDrawer = () => {
     setVisible(true);
@@ -44,7 +38,7 @@ export const Stats = (props) => {
   };
 
    return (
-    <>
+    <div>
       <Space>
         <StyledInstructionsLabel onClick={showDrawer}>
            Find Game Instructions
@@ -57,17 +51,9 @@ export const Stats = (props) => {
         width={500}
         onClose={onClose}
         visible={visible}
-        extra={
-          <Space>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button>
-          </Space>
-        }
       >
-        <Ins />
+        <Instructions />
       </Drawer>
-    </>
+    </div>
   );
 };

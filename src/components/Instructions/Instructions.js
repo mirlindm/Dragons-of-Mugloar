@@ -1,38 +1,76 @@
-import React from 'react';
-import { Timeline, Popover } from 'antd';
-import { ClockCircleOutlined } from '@ant-design/icons';
-import { StyledParagraph } from '../../styles/styles';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { Steps, Button, message } from 'antd';
+const { Step } = Steps;
 
-const StyledLayout = styled.div`
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  bottom: 10%;
-`;
+const steps = [
+  {
+    title: 'START',
+    content: 'Press on START firey button',
+  },
+  {
+    title: 'GAME',
+    content: 'Game xxx has begun',
+  },
+  {
+    title: 'STATS',
+    content: 'View Stats (score, lives & gold)',
+  },
+  {
+    title: 'ADS',
+    content: 'Solve Challenges',
+  },
+  {
+    title: 'SHOP',
+    content: 'Purchase items in the shop',
+  },
+  {
+    title: 'SCORE',
+    content: 'Make sure to score higher than 1000!',
+  },
+  {
+    title: 'FINISH',
+    content: 'Game successfully finished!',
+  },
+];
 
 export const Instructions = () => {
+  const [current, setCurrent] = useState(0);
 
-  const gameInstructions = (
-    <Timeline mode="alternate">
-      <Timeline.Item color="red">Press on START firey button</Timeline.Item>
-      <Timeline.Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>Game xxx has begun</Timeline.Item>
-      <Timeline.Item color="red">
-        View Stats (score, lives &amp; gold)
-      </Timeline.Item>
-      <Timeline.Item color="red">Solve Challenges</Timeline.Item>
-      <Timeline.Item color="red"> Purchase items in the shop </Timeline.Item>
-      <Timeline.Item color="red">Make sure to score higher than 1000!</Timeline.Item>
-    </Timeline>
-  ); 
+  const next = () => {
+    setCurrent(current + 1);
+  };
+
+  const prev = () => {
+    setCurrent(current - 1);
+  };
 
   return (
-    <StyledLayout>   
-      <Popover content={gameInstructions} placement="bottom" title="How to play the game?" trigger="click">
-        <StyledParagraph>Find Game Instructions</StyledParagraph>
-      </Popover>
-    </StyledLayout>
+    <div>
+      <Steps current={current}>
+        {steps.map(item => (
+          <Step key={item.title} title={item.title} />
+        ))}
+      </Steps>
+
+      <div style={{margin: '20px 0', fontSize: '20px', background: '#e25822', color: '#fbbd47'}} className="steps-content">  {steps[current].content} </div>
+      <div className="steps-action">
+      {current > 0 && (
+          <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+            Previous
+          </Button>
+        )}
+        {current < steps.length - 1 && (
+          <Button type="primary" onClick={() => next()}>
+            Next
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button type="primary" onClick={() => message.success('You are now good to go! Click anywhere on the screen to continue!')}>
+            Done
+          </Button>
+        )}
+
+      </div>
+    </div>
   );
-}
-  
-  
+};

@@ -5,23 +5,23 @@ const { Step } = Steps;
 const steps = [
   {
     title: 'START',
-    content: 'Press on START firey button',
+    content: 'Press on the firey START button.',
   },
   {
     title: 'GAME',
-    content: 'Game xxx has begun',
+    content: 'Game xxx has begun!',
   },
   {
     title: 'STATS',
-    content: 'View Stats (score, lives & gold)',
+    content: 'View your Stats (Score, Lives & Gold).',
   },
   {
     title: 'ADS',
-    content: 'Solve Challenges',
+    content: 'Ace your Challenges! Check out the hints!',
   },
   {
     title: 'SHOP',
-    content: 'Purchase items in the shop',
+    content: 'Purchase items in the shop, as needed.',
   },
   {
     title: 'SCORE',

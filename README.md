@@ -41,7 +41,7 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 
 ![alt text](https://github.com/mirlindm/Dragons-of-Mugloar/tree/main/src/assets/giphy.gif "Logo Title Text 1")
 
-![](giphy.gif)
+![here](https://github.com/mirlindm/Dragons-of-Mugloar/giphy.gif)
 
 
 ## Frontend Caterpillar Screenshots

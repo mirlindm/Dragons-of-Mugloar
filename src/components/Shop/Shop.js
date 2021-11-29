@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Drawer, Button, Space, message } from 'antd';
+import { Drawer, Space, message } from 'antd';
 import { getItemsInShop, purchaseItem } from '../../services/gameService';
 import { StyledActionButton,
          StyledName,

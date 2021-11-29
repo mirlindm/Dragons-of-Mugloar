@@ -41,7 +41,7 @@ export const InstructionsDrawer = (props) => {
     <div>
       <Space>
         <StyledInstructionsLabel onClick={showDrawer}>
-           Find Game Instructions
+           How to play the game?
         </StyledInstructionsLabel>
       </Space>
       

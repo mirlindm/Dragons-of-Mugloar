@@ -3,19 +3,18 @@ import { StyledButton,
          StyledParagraph,
          StyledAdInfo,
          StyledHeader,
-        fireyDragonColor,
         goldIshColor, 
         StyledActionButton } from './styles/styles';
 import { startGame, getMessagesForGame, solveMessage } from './services/gameService'
 import { Welcome } from './pages/Welcome';
 import { Stats } from './pages/Stats';
-import { Modal, Button, message } from 'antd';
+import { message } from 'antd';
 import { InstructionsDrawer } from './components/Instructions/InstructionsDrawer';
 import { Shop } from './components/Shop/Shop';
-import Confetti from 'react-confetti';
 import { Badge, Popconfirm } from 'antd';
 import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
 import { Buttons } from './components/Buttons/Buttons';
+import { AdsModal } from './components/Modal/AdsModal';
 
 const App = () => {
   const [gameData, setGameData] = useState('');
@@ -77,8 +76,11 @@ const App = () => {
 
   const solveMessageApi = async (adId) => {
     const { data } = await solveMessage(gameData.gameId, adId)
-    setAdsToSolve(data);
-    setIsModalVisible(true);
+    if(data) {
+      setAdsToSolve(data);
+      setIsModalVisible(true);
+    }
+
     if(data.success) {
       setScore(data.score);
       setLives(data.lives);
@@ -95,36 +97,29 @@ const App = () => {
       message.warning('Game Over. New Game Will begin shortly');
       startGameApi();
     }
-    gameMessages.filter(message => message.adId !== adId);
-    console.log('this id: ', adId)
-    console.log('lives: ', data.lives)
-    console.log(gameMessages);
   }
 
-  const confirm = (e) =>  {
+  const confirm = () =>  {
     startGameApi();
   }
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
 
   return (
     <div>
       {!gameStarted && 
-      <div>
-        <Welcome />
-        <StyledButton onClick={startGameApi}>START</StyledButton>
-        <br/>
-        <InstructionsDrawer> Find Game Instructions </InstructionsDrawer>
-        {/* <Instructions style={{marginRight: '10px'}} gold={gameData.gold} lives={gameData.lives} score={gameData.score} />         */}
-      </div>
+        <div>
+          <Welcome />
+          <StyledButton onClick={startGameApi}>START</StyledButton>          
+          <InstructionsDrawer />
+        </div>
       }
 
       {gameStarted &&
       <div>
         <Stats gameId={gameData} score={score} gold={gold} lives={lives} />  
+        
+        {/* Remove or keep the Buttons Component below */}
         <Buttons />
+
         <div className="flex-row-container">                 
           <div className="flex-row-item" style={{background: 'none', border: 'hidden', marginTop: '-40px'}}> 
             <Popconfirm placement="rightTop" onConfirm={confirm} title="Play again？" okText="Yes" cancelText="No">
@@ -143,8 +138,7 @@ const App = () => {
           </div>
           
           {gameMessages.map(message => {
-            return (               
-              
+            return (                             
                 <div key={message.adId} className="flex-row-item" style={{height: '300px'}}> 
                 {console.log("Ad computed score:", computeAdScore(message))}
                   {computeAdScore(message) < 2 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
@@ -159,49 +153,23 @@ const App = () => {
                       <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Probability: <span style={{fontWeight: 'bolder'}}> {message.probability} </span> </StyledAdInfo>
                       </div>
-
                       <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {message.reward} </span> </StyledAdInfo>
                       </div>
                       <div style={{position: 'relative', top: '10px'}}>
-                      <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>
+                        <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>
                       </div>
-                      
-                      {/* <div style={{position: 'relative', top: '75px', right: '140px'}}> */}
-                        {/* <hr style={{borderColor: `${goldIshColor}`}} />                     */}
-                        
-                      {/* </div> */}
-                  </div>                      
-                    
+                  </div>
 
-                    {/* <Countdown style={{position: 'relative', right: '-170px', top: '-15px', fontSize: '2px !important', color: `${fireyDragonColor} !important`}} value={Date.now() + message.expiresIn * 1000} format={'ss'} />                     */}
-                </div>                         
+                </div>
               ); 
             })}          
         </div>
 
-        <Modal 
-          transitionName="" 
-          maskTransitionName="" 
-          title="Challenge Result" 
-          visible={isModalVisible} onOk={handleOk} 
-          centered
-          footer={[
-            <Button style={{border: `1px solid ${fireyDragonColor}`}} onClick={handleOk}>Ok</Button>
-          ]}
-        >
-          {adsToSolve ?
-            <div>
-              <h1> {adsToSolve.success ? <Confetti numberOfPieces={150} width={500} height={700}/> : <StyledHeader>Challenge failed</StyledHeader>} </h1>
-              <StyledHeader style={{fontSize: '30px', textAlign: 'center'}}> {adsToSolve.message} </StyledHeader>
-              <StyledAdInfo>Your score is {adsToSolve.score}</StyledAdInfo>
-              <StyledAdInfo>Your highscore is {adsToSolve.highscore}</StyledAdInfo>
-              <StyledAdInfo>You have {adsToSolve.gold} gold!</StyledAdInfo>            
-              <StyledAdInfo>You have {adsToSolve.lives} lives</StyledAdInfo>
-            </div>
-            : null                    
-          }
-        </Modal> 
+        {/* Imported Modal Start */}
+        <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />
+        {/* Imported Modal End */}
+        
       </div>      
       }  
       {score > 1000 ? message.success("You reached 1K score!") : null}    

@@ -9,9 +9,8 @@ import { StyledButton,
 import { startGame, getMessagesForGame, solveMessage } from './services/gameService'
 import { Welcome } from './pages/HomePage/Welcome';
 import { Stats } from './pages/GameStats/Stats';
-import { message } from 'antd';
+import { message, notification } from 'antd';
 import { InstructionsDrawer } from './pages/Instructions/InstructionsDrawer';
-// import { Shop } from './pages/Shop/Shop';
 import { Badge } from 'antd';
 import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
 import { Buttons } from './components/Buttons/Buttons';
@@ -58,13 +57,16 @@ const App = () => {
     const { data } = await getMessagesForGame(gameData.gameId);
     if(data) {
       console.log('messages for the game:', data);        
-      const filteredData = data.filter(message => !message.adId.endsWith('='))
-      setGameMessages(filteredData.sort(sortGameMessagesByReward));
+      const filteredAds = data.filter(message => !message.adId.endsWith('='));
+      setGameMessages(filteredAds.sort(sortGameMessagesByReward));
+
+
+
       // setMaxComputedScore(computeAdScore(filteredData));
 
       // setGameMessages(data.sort(computeAdScore(score, data.probability, data.reward, data.expiresIn)));
 
-      //console.log("after sorting", data.sort((a, b) => (a.reward > b.reward ? 1 : -1)));  
+      //console.log("after sorting", data.sort((a, b) => (a.reward > b.reward ? 1 : -1)));
     }
     //gameMessages.sort((firstObject, secondObject) => (firstObject.reward > secondObject.reward) ? 1 : -1);
     // console.log("gameMessages", gameMessages)
@@ -95,9 +97,18 @@ const App = () => {
     }
     getMessagesForGameApi();
 
+    if(lives === 1 || data.lives === 1) {
+      message.warning('Game about to end. Purchase in store');
+    }
+
     if(lives === 0 || data.lives === 0) {
       message.warning('Game Over. New Game Will begin shortly');
       startGameApi();
+    }
+
+    if(score >= 1000 || data.score >= 1000) {
+      message.success('Congrats! You reached 1K score!');
+      
     }
   }
 
@@ -124,7 +135,7 @@ const App = () => {
           {gameMessages.map(message => {
             return (                             
                 <div key={message.adId} className="flex-row-item" style={{height: '300px'}}> 
-                {console.log("Ad computed score:", computeAdScore(message))}
+                  {console.log("Ad computed score:", computeAdScore(message))}
                   {computeAdScore(message) < 2 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
                   {computeAdScore(message) >= 2 && computeAdScore(message) < 3  ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
                   {computeAdScore(message) > 40 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
@@ -137,21 +148,23 @@ const App = () => {
                       <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Probability: <span style={{fontWeight: 'bolder'}}> {message.probability} </span> </StyledAdInfo>
                       </div>
+
                       <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {message.reward} </span> </StyledAdInfo>
                       </div>
+
                       <div style={{position: 'relative', top: '10px'}}>
                         <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>
                       </div>
                   </div>
+
                 </div>
               ); 
             })}          
         </div>      
         <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />         
       </div>      
-      }  
-      {score > 1000 ? message.success("You reached 1K score!") : null}    
+      }
     </div>
   );
 }

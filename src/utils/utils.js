@@ -8,7 +8,7 @@ const adProbabilities = {
     'Piece of cake' : 0.8,
     'Quite likely' : 0.7,
     'Rather detrimental' : 0.2,
-    'Suicide mission' : 0.1, 
+    'Suicide mission' : 0.1,
 }
 
 const getProbability = (probability) => {

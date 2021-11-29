@@ -36,6 +36,11 @@ code {
     monospace;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
+
 /* Container */
 
 .container {

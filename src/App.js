@@ -15,6 +15,7 @@ import { Shop } from './components/Shop/Shop';
 import Confetti from 'react-confetti';
 import { Badge, Popconfirm } from 'antd';
 import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
+import { Buttons } from './components/Buttons/Buttons';
 
 const App = () => {
   const [gameData, setGameData] = useState('');
@@ -123,18 +124,17 @@ const App = () => {
       {gameStarted &&
       <div>
         <Stats gameId={gameData} score={score} gold={gold} lives={lives} />  
-        
+        <Buttons />
         <div className="flex-row-container">                 
-      
           <div className="flex-row-item" style={{background: 'none', border: 'hidden', marginTop: '-40px'}}> 
             <Popconfirm placement="rightTop" onConfirm={confirm} title="Play again？" okText="Yes" cancelText="No">
-              <StyledButton> Restart &nbsp; <i style={{marginLeft: '-15px'}} className="fas fa-redo"> </i> </StyledButton> 
+              <StyledButton> Restart <span style={{marginRight: '30px'}} /> <i style={{marginLeft: '-15px'}} className="fas fa-redo nowrap"> </i> </StyledButton> 
             </Popconfirm>            
           </div>
 
           <div className="flex-row-item" style={{background: 'none', border: 'hidden', marginTop: '-40px'}}> 
             <Shop gameId={gameData.gameId} gold={gold} style={{width: '150px', textAlign: 'center', margin: 'auto'}}> 
-              <i  class="fas fa-shopping-cart"></i> 
+              <i class="fas fa-shopping-cart"></i> 
             </Shop> 
           </div>
 

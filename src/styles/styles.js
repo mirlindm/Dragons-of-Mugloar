@@ -4,7 +4,7 @@ import { Button } from 'antd';
 export var fireyDragonColor = '#e25822';
 export var goldIshColor = '#fbbd47';
 
-export const StyledHeading = styled.h1`
+export const StyledMainHeading = styled.h1`
     font-size: 130px;
     font-weight: bolder;    
     background: -webkit-linear-gradient(${goldIshColor}, ${fireyDragonColor});
@@ -30,8 +30,7 @@ export const StyledParagraph = styled.p`
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 5px;
-    margin-top: -40px;
+    margin: -40px 0 5px 0;
     position: relative;
     z-index: 10;
     padding: 5px; 
@@ -44,7 +43,6 @@ export const StyledButton = styled(Button)`
     position: relative;
     display: inline-block;
     margin: auto;
-    margin-top: 50px;
     color: #ffffff;
     font-family: Architects Daughter, cursive;
     font-weight: bold;
@@ -53,6 +51,7 @@ export const StyledButton = styled(Button)`
     text-decoration: none;
     background-color: ${fireyDragonColor};
     padding: 20px 40px;
+    margin-top: 50px;
 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     text-shadow: 0px 1px 0px #000;
@@ -177,5 +176,4 @@ export const StyledActionButton = styled(Button)`
         border-color: ${goldIshColor};
         box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
     }
-
 `;

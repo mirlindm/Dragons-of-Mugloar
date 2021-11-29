@@ -64,7 +64,7 @@ export const Shop = (props) => {
     <>
       <Space>
         <StyledButton onClick={() => {setVisible(true); getItemsInShopApi()}}>
-          Shop &nbsp;
+          Shop <span style={{marginRight: '20px'}} />
           <i className="fas fa-shopping-cart"></i>
         </StyledButton>
       </Space>

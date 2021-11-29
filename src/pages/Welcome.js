@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyledHeading, StyledParagraph } from '../styles/styles';
+import { StyledMainHeading, StyledParagraph } from '../styles/styles';
 
 export const Welcome = () => {
     return (
         <div>
-            <StyledHeading>
+            <StyledMainHeading>
                 Dragons of Mugolar
-            </StyledHeading> 
+            </StyledMainHeading> 
             
             <StyledParagraph>
                 Hit Start to Play

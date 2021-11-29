@@ -161,7 +161,7 @@ const App = () => {
                       </div>
 
                       <div style={{margin: '0 150px' }}>
-                        <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {message.reward}  {message.reward > 30 ? '👍🏽'	: '👎🏽'} </span> </StyledAdInfo>
+                        <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {message.reward} </span> </StyledAdInfo>
                       </div>
                       <div style={{position: 'relative', top: '10px'}}>
                       <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>

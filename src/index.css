@@ -11,8 +11,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  background: url('./assets/dragon3.jpeg') no-repeat center center fixed; 
+  background: url('./assets/castleBackground.jpeg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -25,12 +24,6 @@ body {
   text-align: center;
 }
 
-/* @media only screen and (min-width: 950px) {
-  body {
-    overflow: hidden;
-  }
-} */
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -39,7 +32,6 @@ code {
 .nowrap {
   white-space: nowrap;
 }
-
 
 /* Container */
 
@@ -214,7 +206,6 @@ html, body, .container {
 }
 
 .card-1 {
-  /* background: radial-gradient(#1fe4f5, #3fbafe); */
   background-color: var(--goldColorCode) !important;
 }
 
@@ -263,23 +254,23 @@ html, body, .container {
 /* Divider */
 
 .divider {
-  overflow: visible; /* For IE */
-    height: 30px;
-    border-style: solid;
-    border-color: var(--dragonColorCode);
-    border-width: 1px 0 0 0;
-    border-radius: 20px;
+  overflow: visible; 
+  height: 30px;
+  border-style: solid;
+  border-color: var(--dragonColorCode);
+  border-width: 1px 0 0 0;
+  border-radius: 20px;
 }
 
 .divider::before {
   display: block;
-    content: "";
-    height: 30px;
-    margin-top: -31px;
-    border-style: solid;
-    border-color: var(--dragonColorCode);
-    border-width: 0 0 1px 0;
-    border-radius: 20px;
+  content: "";
+  height: 30px;
+  margin-top: -31px;
+  border-style: solid;
+  border-color: var(--dragonColorCode);
+  border-width: 0 0 1px 0;
+  border-radius: 20px;
 }
 
 
@@ -300,23 +291,12 @@ html, body, .container {
   }
 }
 
-/* @media only screen and (max-width: 960px) {
-  .flex-row-container > .flex-row-item {
-    flex-direction: column;
-  }
-} */
-
 .flex-row-container > .flex-row-item {
   flex: 40%; /* or - flex: 0 50% - or - flex-basis: 50% - */
   margin-bottom: 10px;
   margin-right: 10px;
   height: 150px;
 }
-
-/* .flex-row-container > .flex-row-item:hover {
-  box-shadow: 0 0 11px rgba(33,33,33,.2); 
-  color: 0 0 3px #f76707;
-}  */
 
 .flex-row-item {
 background-color: var(--dragonColorCode);
@@ -357,19 +337,10 @@ border-radius: 10px;
 }
 
 /* Messages */
-.ant-message-notice-content::after {
-  content: '🐉';
-  
-}
+
 /* .ant-message-notice-content::after {
-  content:url('./assets/dr.png'); 
-  width: 10px !important;
-  height: 10px !important;
-  position:relative; /*or absolute*/
-  /* z-index:100000;  */
-  /* left:-50px; */
-  /* top:10px; */
-/* } */ 
+  content: '🐉'; 
+} */
 
 /* Scrollbar */
 

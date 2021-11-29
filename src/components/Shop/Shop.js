@@ -12,8 +12,6 @@ import styled from 'styled-components';
 const DrawerLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
-  /* border-right: 1px solid red;
-  border-left: 1px solid red; */
   margin-top: 10px;
   
 `;
@@ -24,7 +22,6 @@ const DrawerContent = styled.div`
   margin: 10px;
   padding: 10px;
   border-left: 5px solid #e25822;
-  /* border-radius: 5px; */
 
   &:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
@@ -70,7 +67,7 @@ export const Shop = (props) => {
       </Space>
       
       <Drawer
-        title="Welcome to the dragon shop 🎁"
+        title="All the things you need 🎁"
         placement={"right"}
         width={500}
         onClose={onClose}

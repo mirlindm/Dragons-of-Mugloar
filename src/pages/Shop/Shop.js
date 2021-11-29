@@ -46,8 +46,10 @@ export const Shop = (props) => {
     const { data } = await purchaseItem(props.gameId, itemId);
     if (data) {    
       message.success("Item Purchased!");
+      console.log("Item Purchased", data)
       props.setGold(props.gold - itemCost);
-    } 
+      props.setLives(data.lives);
+    }
   }
 
   const onClose = () => {

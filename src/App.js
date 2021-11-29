@@ -9,7 +9,7 @@ import { StyledButton,
 import { startGame, getMessagesForGame, solveMessage } from './services/gameService'
 import { Welcome } from './pages/HomePage/Welcome';
 import { Stats } from './pages/GameStats/Stats';
-import { message, notification } from 'antd';
+import { message } from 'antd';
 import { InstructionsDrawer } from './pages/Instructions/InstructionsDrawer';
 import { Badge } from 'antd';
 import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
@@ -18,22 +18,21 @@ import { AdsModal } from './components/Modal/AdsModal';
 
 const App = () => {
   const [gameData, setGameData] = useState('');
-  const [gameStarted, setGameStarted] = useState(false);
+  const [hasGameStarted, setHasGameStarted] = useState(false);
   const [gameMessages, setGameMessages] = useState([]);
   const [adsToSolve, setAdsToSolve] = useState([]);
+  const [normalizedAdScores, setNormalizedAdScores] = useState([]);
   const [score, setScore] = useState(0);
   const [gold, setGold] = useState(0);
   const [lives, setLives] = useState(0);
-  // const [maxComputedScore, setMaxComputedScore] = React.useState(0);
-  // const [adScore, setAdScore] = React.useState(0);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const startGameApi = async () => {
     const { data }  = await startGame();
-    console.log("game started: ", data)
+    console.log("game started: ", data);
     setGameData(data);
-    setGameStarted(true);
+    setHasGameStarted(true);
     setScore(data.score);
     setGold(data.gold);
     setLives(data.lives);
@@ -58,10 +57,15 @@ const App = () => {
     if(data) {
       console.log('messages for the game:', data);        
       const filteredAds = data.filter(message => !message.adId.endsWith('='));
+
       setGameMessages(filteredAds.sort(sortGameMessagesByReward));
 
+      // console.log("Normalized ad scores1: ", normalizedAdScores);
+      // setNormalizedAdScores(gameMessages.map(message => computeAdScore(message)));
 
-
+      // console.log("Normalized ad scores2: ", normalizedAdScores);
+      // setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
+      // console.log("Normalized ad scores3: ", normalizedAdScores);
       // setMaxComputedScore(computeAdScore(filteredData));
 
       // setGameMessages(data.sort(computeAdScore(score, data.probability, data.reward, data.expiresIn)));
@@ -72,49 +76,51 @@ const App = () => {
     // console.log("gameMessages", gameMessages)
     //let x = gameMessages.sort((a, b) => (a.reward > b.reward ? 1 : -1));
     //console.log("sorted?", x)
+
+
     setTimeout(() => {
       console.log("after sorting", data.sort((a, b) => (a.reward > b.reward ? 1 : -1)));  
-    }, 10000)
+    }, 10000);
     
   }
 
   const solveMessageApi = async (adId) => {
-    const { data } = await solveMessage(gameData.gameId, adId)
+    const { data } = await solveMessage(gameData.gameId, adId);
+
     if(data) {
-      console.log("solved: ", data)
+      console.log("solved: ", data);
       setAdsToSolve(data);
       setIsModalVisible(true);
-    }
 
-    if(data.success) {
-      setScore(data.score);
-      setLives(data.lives);
-      setGold(data.gold);      
-    } else {
-      setScore(data.score);
-      setLives(data.lives);
-      setGold(data.gold);
-    }
-    getMessagesForGameApi();
-
-    if(lives === 1 || data.lives === 1) {
-      message.warning('Game about to end. Purchase in store');
-    }
-
-    if(lives === 0 || data.lives === 0) {
-      message.warning('Game Over. New Game Will begin shortly');
-      startGameApi();
-    }
-
-    if(score >= 1000 || data.score >= 1000) {
-      message.success('Congrats! You reached 1K score!');
-      
+      if(data.success) {
+        setScore(data.score);
+        setLives(data.lives);
+        setGold(data.gold);      
+      } else {
+        setScore(data.score);
+        setLives(data.lives);
+        setGold(data.gold);
+      }
+      getMessagesForGameApi();
+  
+      if(data.lives === 1) {
+        message.warning('Only 1 life remaining. Consider purchasing a healing potion from the shop!');
+      }
+  
+      if(data.lives === 0) {
+        message.warning('Game Over. New Game Will begin shortly ... ');
+        startGameApi();
+      }
+  
+      if(data.score >= 1000) {
+        message.success('Congrats! You reached 1K score! Keep it up!');      
+      }
     }
   }
 
   return (
     <div>
-      {!gameStarted && 
+      {!hasGameStarted && 
         <div>
           <Welcome />
           <StyledButton onClick={startGameApi}>START</StyledButton>          
@@ -122,24 +128,25 @@ const App = () => {
         </div>
       }
 
-      {gameStarted &&
+      {hasGameStarted &&
       <div>
         <Stats gameId={gameData} score={score} gold={gold} lives={lives} />          
-        <Buttons setGold={setGold} gold={gold} gameId={gameData.gameId} startGameApi={startGameApi} />
+        <Buttons gold={gold} setGold={setGold} setLives={setLives} gameId={gameData.gameId} startGameApi={startGameApi} />
 
         <div className="flex-row-container">
           <div className="flex-row-item-one game-name" style={{marginTop: '30px'}}> 
             <StyledParagraph style={{mixBlendMode: 'difference', top: '40px'}}>Take on Challenges Below</StyledParagraph>
           </div>
           
-          {gameMessages.map(message => {
+          {gameMessages.map((message,key) => {
+            console.log(key, ' normalized score ', normalizedAdScores[key])
             return (                             
                 <div key={message.adId} className="flex-row-item" style={{height: '300px'}}> 
                   {console.log("Ad computed score:", computeAdScore(message))}
-                  {computeAdScore(message) < 2 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
-                  {computeAdScore(message) >= 2 && computeAdScore(message) < 3  ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
-                  {computeAdScore(message) > 40 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
-                  {computeAdScore(message) > 100 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                    
+                  {normalizedAdScores[key] < 0.4 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
+                  {normalizedAdScores[key] >= 0.8 ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
+                  {normalizedAdScores[key] > 0.6 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
+                  {normalizedAdScores[key] > 0.95 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                    
                     
                   <StyledHeader style={{marginTop: '2px'}}> {message.adId} </StyledHeader>                              
                   <StyledAdInfo> {message.message} </StyledAdInfo>

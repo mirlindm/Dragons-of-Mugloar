@@ -19,7 +19,7 @@ export const Buttons = (props) => {
       </div>
 
       <div className="flex-row-item" style={inlineStyles}> 
-        <Shop setGold={props.setGold} gold={props.gold} gameId={props.gameId} style={{width: '150px', textAlign: 'center', margin: 'auto'}}> 
+        <Shop setGold={props.setGold} gold={props.gold} setLives={props.setLives} gameId={props.gameId} style={{width: '150px', textAlign: 'center', margin: 'auto'}}> 
           <i class="fas fa-shopping-cart"></i> 
         </Shop> 
       </div>

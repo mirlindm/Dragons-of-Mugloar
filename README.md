@@ -37,7 +37,6 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 
 ## Dragons of Mugloar GIFs
 ![Dragons of Mugloar Part 1](https://user-images.githubusercontent.com/55096560/144057496-731242cb-0859-4644-b95a-588e638f809b.gif)
-
 ![Dragons of Mugloar Part 2](https://user-images.githubusercontent.com/55096560/144057761-69d4e35c-13a0-434f-87fb-8346281ee39b.gif)
 <br /> <br />
 

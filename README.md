@@ -1,6 +1,6 @@
 # **Dragons of Mugloar**
 
-**Visual Experience** for **Dragons og Mugloar Game**. 
+**Visual Experience** for **Dragons of Mugloar Game**. 
 
 For more information about the game itself and the nicely documented APIs, you can visit the following website: [Dragons of Mugloar](https://dragonsofmugloar.com/)
 

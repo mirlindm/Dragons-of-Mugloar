@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, Space, message } from 'antd';
 import { getItemsInShop, purchaseItem } from '../../services/gameService';
 import { StyledActionButton,
-         StyledName,
+         StyledItemName,
          StyledContent,
          StyledButton
         } from '../../styles/styles';
@@ -44,6 +44,7 @@ export const Shop = (props) => {
     }
     const { data } = await purchaseItem(props.gameId, itemId);
     if (data) {    
+      console.log("item purchased: ", data)
       message.success("Item Purchased!");
       props.setGold(props.gold - itemCost);
       props.setLives(data.lives);
@@ -74,7 +75,7 @@ export const Shop = (props) => {
           {itemsInShop.map((item) => {
             return(
               <DrawerContent key={item.id}>   
-                <StyledName> {item.name} </StyledName>             
+                <StyledItemName> {item.name} </StyledItemName>             
                  <hr className="divider" />
                 <StyledContent>Cost: {item.cost}</StyledContent>
                 <StyledActionButton onClick={() => purchaseItemApi(item.id, item.cost)}>Purchase</StyledActionButton>

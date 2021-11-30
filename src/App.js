@@ -86,10 +86,10 @@ const App = () => {
 
   const normalizeAdsScore = () => {    
     setNormalizedAdScores(gameAds.map(ad => computeAdScore(ad)));
-    console.log("computed each ad score: ", normalizedAdScores);
+    // console.log("computed each ad score: ", normalizedAdScores);
 
     setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
-    console.log("Normalized each ad score: ", normalizedAdScores);
+    // console.log("Normalized each ad score: ", normalizedAdScores);
   }
 
   const solveMessageApi = async (adId) => {
@@ -143,10 +143,10 @@ const App = () => {
           </div>
           
           {gameAds.map((ad, key) => {
-            console.log(key, ' normalized score ', normalizedAdScores[key])
+            // console.log(key, ' normalized score ', normalizedAdScores[key])
             return (                             
                 <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 
-                  {console.log(ad, "Ad computed score:", computeAdScore(ad))}
+                  {/* {console.log(ad, "Ad computed score:", computeAdScore(ad))} */}
                   {ad.reward > 24 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
                   {normalizedAdScores[key] < 0.4 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
                   {normalizedAdScores[key] >= 0.8 ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
@@ -156,7 +156,7 @@ const App = () => {
                   <StyledHeader style={{marginTop: '2px'}}> {ad.adId} </StyledHeader>                              
                   <StyledAdInfo> {ad.message} </StyledAdInfo>
                       
-                  <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', }}>
+                  <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column'}}>
                       <div style={{margin: '0 150px' }}>
                         <StyledAdInfo>Probability: <span style={{fontWeight: 'bolder'}}> {ad.probability} </span> </StyledAdInfo>
                       </div>
@@ -166,7 +166,7 @@ const App = () => {
                       </div>
 
                       <div style={{position: 'relative', top: '10px'}}>
-                        <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(ad.adId)} > Solve this add </StyledActionButton>
+                        <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(ad.adId)}>Solve this add</StyledActionButton>
                       </div>
                   </div>
                 </div>

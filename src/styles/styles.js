@@ -101,7 +101,7 @@ export const StyledButton = styled(Button)`
     }
 `;
 
-export const StyledName = styled.p`    
+export const StyledItemName = styled.p`    
     font-weight: bold;
     font-size: 25px; 
     font-family: Architects Daughter, cursive;

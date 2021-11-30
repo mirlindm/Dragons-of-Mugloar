@@ -24,10 +24,11 @@ const App = () => {
 
   const [gameAds, setGameAds] = useState([]);
   const [adsToSolve, setAdsToSolve] = useState([]);
-  const [normalizedAdScores, setNormalizedAdScores] = useState([]);
+  // const [normalizedAdScores, setNormalizedAdScores] = useState([]);
 
   const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isScoreEqualToOneThousand, setIsScoreEqualToOneThousand ] = useState(true);
 
   const updateStats = data => {
     setScore(data.score);
@@ -61,36 +62,16 @@ const App = () => {
     if(data) {             
       const filteredAds = data.filter(ad => !ad.adId.endsWith('='));
       setGameAds(filteredAds.sort(sortGameMessagesByReward));
-
-      // console.log("Normalized ad scores1: ", normalizedAdScores);
-      // setNormalizedAdScores(gameMessages.map(message => computeAdScore(message)));
-
-      // console.log("Normalized ad scores2: ", normalizedAdScores);
-      // setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
-      // console.log("Normalized ad scores3: ", normalizedAdScores);
-      // setMaxComputedScore(computeAdScore(filteredData));
-
-      // setGameMessages(data.sort(computeAdScore(score, data.probability, data.reward, data.expiresIn)));
-
-      //console.log("after sorting", data.sort((a, b) => (a.reward > b.reward ? 1 : -1)));
     }
-    //gameMessages.sort((firstObject, secondObject) => (firstObject.reward > secondObject.reward) ? 1 : -1);
-    // console.log("gameMessages", gameMessages)
-    //let x = gameMessages.sort((a, b) => (a.reward > b.reward ? 1 : -1));
-    //console.log("sorted?", x)
-    // normalizeAdsScore();
-
-    // setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
-    // console.log("Normalized each ad score: ", normalizedAdScores);
   }
 
-  const normalizeAdsScore = () => {    
-    setNormalizedAdScores(gameAds.map(ad => computeAdScore(ad)));
-    // console.log("computed each ad score: ", normalizedAdScores);
+  // const normalizeAdsScore = () => {    
+  //   setNormalizedAdScores(gameAds.map(ad => computeAdScore(ad)));
+  //   // console.log("computed each ad score: ", normalizedAdScores);
 
-    setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
-    // console.log("Normalized each ad score: ", normalizedAdScores);
-  }
+  //   setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
+  //   // console.log("Normalized each ad score: ", normalizedAdScores);
+  // }
 
   const solveMessageApi = async (adId) => {
     const { data } = await solveMessage(gameData.gameId, adId);
@@ -99,12 +80,7 @@ const App = () => {
       console.log("solved: ", data);
       setAdsToSolve(data);
       setIsModalVisible(true);
-
-      if(data.success) {
-        updateStats(data);   
-      } else {
-        updateStats(data);
-      }
+      updateStats(data);   
       getAdsForGameApi();
   
       if(data.lives === 1) {
@@ -116,9 +92,10 @@ const App = () => {
         startGameApi();
       }
   
-      if(data.score >= 1000) {
-        message.success('Congrats! You reached 1K score! Keep it up!');      
-      }
+      if(isScoreEqualToOneThousand && data.score >= 1000) {  
+        message.success('Congrats! You reached 1K score! Keep it up!');
+        setIsScoreEqualToOneThousand(false);
+      }     
     }
   }
 
@@ -146,12 +123,13 @@ const App = () => {
             // console.log(key, ' normalized score ', normalizedAdScores[key])
             return (                             
                 <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 
+                {console.log(ad, "key: ", key)}
                   {/* {console.log(ad, "Ad computed score:", computeAdScore(ad))} */}
-                  {ad.reward > 24 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
-                  {normalizedAdScores[key] < 0.4 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
-                  {normalizedAdScores[key] >= 0.8 ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
-                  {normalizedAdScores[key] > 0.6 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
-                  {normalizedAdScores[key] > 0.95 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                    
+                  {ad.reward >= 130 ? <Badge.Ribbon placement="end" text="TRAP!" color="black"> </Badge.Ribbon> : null }
+                  {key > 7 ? <Badge.Ribbon placement="start" text="Perhaps Later!" color="red"> </Badge.Ribbon> : null }
+                  {key < 3 ? <Badge.Ribbon placement="start" text="Recommended!" color="blue"> </Badge.Ribbon> : null }                    
+                  {key < 5 && key >=3 ? <Badge.Ribbon placement="start" text="Go for it1" color="gold"> </Badge.Ribbon> : null }                    
+                  {/* {normalizedAdScores[key] > 0.95 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                     */}
                     
                   <StyledHeader style={{marginTop: '2px'}}> {ad.adId} </StyledHeader>                              
                   <StyledAdInfo> {ad.message} </StyledAdInfo>
@@ -174,6 +152,7 @@ const App = () => {
             })}          
         </div>      
         <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />         
+        
       </div>      
       }
     </div>

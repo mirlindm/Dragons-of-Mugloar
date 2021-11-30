@@ -43,8 +43,7 @@ export const Shop = (props) => {
       return message.warning("Insufficient Gold!");
     }
     const { data } = await purchaseItem(props.gameId, itemId);
-    if (data) {    
-      console.log("item purchased: ", data)
+    if (data) {          
       message.success("Item Purchased!");
       props.setGold(props.gold - itemCost);
       props.setLives(data.lives);

@@ -13,10 +13,13 @@ export const AdsModal = (props) => {
         <Modal 
           transitionName="" 
           maskTransitionName="" 
-          title="Challenge Result" 
-          visible={props.isModalVisible} onOk={handleOk}
+          title="Challenge Solving Result" 
+          visible={props.isModalVisible}
+          onOk={handleOk}
           centered
           closable={false}
+          keyboard={false}
+          maskClosable={true}
           footer={[
             <Button style={{border: `1px solid ${fireyDragonColor}`}} onClick={handleOk}>Ok</Button>
           ]}

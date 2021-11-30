@@ -38,13 +38,13 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 ## Application Structure
 
     .
-    ├── build                   # Compiled files (alternatively `dist`)
-    ├── docs                    # Documentation files (alternatively `doc`)
+    ├── public                  # Application <html> </html> and favicon
+    ├── src                     # Documentation files (alternatively `doc`)
     ├── src                     # Source files (alternatively `lib` or `app`)
-    ├── test                    # Automated tests (alternatively `spec` or `tests`)
-    ├── tools                   # Tools and utilities
-    ├── LICENSE
-    └── README.md
+    ├── .gitignore              # Application files to ignore when committing to the remote repository
+    ├── package-lock.json       # Tracking installed packages version throughout the application
+    ├── package.json            # Application dependencies/packages (install them through ```npm install``` ) 
+    └── README.md               # Application thorough description
 
 ## Dragons of Mugloar GIFs
 ![Dragons of Mugloar Part 1](https://user-images.githubusercontent.com/55096560/144057496-731242cb-0859-4644-b95a-588e638f809b.gif)

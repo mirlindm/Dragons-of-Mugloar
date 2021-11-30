@@ -8,7 +8,6 @@ For more information about the game itself and the nicely documented APIs, you c
 
 > React, Ant Design, React+Redux, Styled Components.
 
-
 ## Installation
 
 - Download or clone this repository to your local machine: 
@@ -30,22 +29,17 @@ npm start
 - To run the tests, located in: ``` /src/utils/utils.test.js``` , run the commmand:
 ```
 npm test
-``` 
+```
 
 ## About the Application
+
 The Kingdom of Mugloar has noticeably changed over the short time of just a few years – it was not long ago when the state officials introduced a skilled dragon trainer to the country’s payroll to train the scaly beasts to protect our lands against invading knights, hungry for royal hands in marriage – princess or miscellaneous. The dragon trainer was successful in fending off the knights and making dragons commonplace in the Mugloarian everyday...
 
 ## Application GIF
 
 ![App Gif](https://github.com/mirlindm/Dragons-of-Mugloar/tree/main/src/assets/test.gif)
 
-![alt text](https://github.com/mirlindm/Dragons-of-Mugloar/tree/main/src/assets/giphy.gif "Logo Title Text 1")
-
-![here](https://github.com/mirlindm/Dragons-of-Mugloar/giphy.gif)
-
 ![Untitled](https://user-images.githubusercontent.com/55096560/143934687-8ff8ff91-d4a3-4c73-9849-9d627dd0e4c3.gif)
-
-
 
 ## Frontend Caterpillar Screenshots
 <img alt="Home Page" src="./src/assets/UI_Screenshots/HomePage.png">

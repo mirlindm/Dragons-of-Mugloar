@@ -17,6 +17,6 @@ const getProbability = (probability) => {
 
 export const computeAdScore = (ad) => {
     const gameScore = 999;
-    console.log(ad.probability, ' ', getProbability(ad.probability))
+    // console.log(ad.probability, ' ', getProbability(ad.probability))
     return gameScore < 1000 ? getProbability(ad.difficulty) * (2 + Math.log(ad.reward)) : getProbability(ad.difficulty) * (1 + Math.sqrt(ad.reward)) / ad.expiresIn;
 }

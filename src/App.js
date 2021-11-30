@@ -17,25 +17,29 @@ import { Buttons } from './components/Buttons/Buttons';
 import { AdsModal } from './components/Modal/AdsModal';
 
 const App = () => {
-  const [gameData, setGameData] = useState('');
-  const [hasGameStarted, setHasGameStarted] = useState(false);
-  const [gameMessages, setGameMessages] = useState([]);
-  const [adsToSolve, setAdsToSolve] = useState([]);
-  const [normalizedAdScores, setNormalizedAdScores] = useState([]);
+  const [gameData, setGameData] = useState({});
   const [score, setScore] = useState(0);
   const [gold, setGold] = useState(0);
   const [lives, setLives] = useState(0);
 
+  const [gameAds, setGameAds] = useState([]);
+  const [adsToSolve, setAdsToSolve] = useState([]);
+  const [normalizedAdScores, setNormalizedAdScores] = useState([]);
+
+  const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const startGameApi = async () => {
-    const { data }  = await startGame();
-    console.log("game started: ", data);
-    setGameData(data);
-    setHasGameStarted(true);
+  const updateStats = data => {
     setScore(data.score);
     setGold(data.gold);
     setLives(data.lives);
+  }
+
+  const startGameApi = async () => {
+    const { data }  = await startGame();
+    setGameData(data);
+    setHasGameStarted(true);
+    updateStats(data);
   }
 
   useEffect(() => {
@@ -49,16 +53,14 @@ const App = () => {
     //   .catch(e => console.log(e));
     // }
     
-    getMessagesForGameApi();
+    getAdsForGameApi();
   }, [gameData.gameId]);
 
-  const getMessagesForGameApi = async () => {
+  const getAdsForGameApi = async () => {
     const { data } = await getMessagesForGame(gameData.gameId);
-    if(data) {
-      console.log('messages for the game:', data);        
-      const filteredAds = data.filter(message => !message.adId.endsWith('='));
-
-      setGameMessages(filteredAds.sort(sortGameMessagesByReward));
+    if(data) {             
+      const filteredAds = data.filter(ad => !ad.adId.endsWith('='));
+      setGameAds(filteredAds.sort(sortGameMessagesByReward));
 
       // console.log("Normalized ad scores1: ", normalizedAdScores);
       // setNormalizedAdScores(gameMessages.map(message => computeAdScore(message)));
@@ -76,12 +78,18 @@ const App = () => {
     // console.log("gameMessages", gameMessages)
     //let x = gameMessages.sort((a, b) => (a.reward > b.reward ? 1 : -1));
     //console.log("sorted?", x)
+    // normalizeAdsScore();
 
+    // setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
+    // console.log("Normalized each ad score: ", normalizedAdScores);
+  }
 
-    setTimeout(() => {
-      console.log("after sorting", data.sort((a, b) => (a.reward > b.reward ? 1 : -1)));  
-    }, 10000);
-    
+  const normalizeAdsScore = () => {    
+    setNormalizedAdScores(gameAds.map(ad => computeAdScore(ad)));
+    console.log("computed each ad score: ", normalizedAdScores);
+
+    setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
+    console.log("Normalized each ad score: ", normalizedAdScores);
   }
 
   const solveMessageApi = async (adId) => {
@@ -93,15 +101,11 @@ const App = () => {
       setIsModalVisible(true);
 
       if(data.success) {
-        setScore(data.score);
-        setLives(data.lives);
-        setGold(data.gold);      
+        updateStats(data);   
       } else {
-        setScore(data.score);
-        setLives(data.lives);
-        setGold(data.gold);
+        updateStats(data);
       }
-      getMessagesForGameApi();
+      getAdsForGameApi();
   
       if(data.lives === 1) {
         message.warning('Only 1 life remaining. Consider purchasing a healing potion from the shop!');
@@ -130,7 +134,7 @@ const App = () => {
 
       {hasGameStarted &&
       <div>
-        <Stats gameId={gameData} score={score} gold={gold} lives={lives} />          
+        <Stats gameId={gameData.gameId} score={score} gold={gold} lives={lives} />          
         <Buttons gold={gold} setGold={setGold} setLives={setLives} gameId={gameData.gameId} startGameApi={startGameApi} />
 
         <div className="flex-row-container">
@@ -138,33 +142,33 @@ const App = () => {
             <StyledParagraph style={{mixBlendMode: 'difference', top: '40px'}}>Take on Challenges Below</StyledParagraph>
           </div>
           
-          {gameMessages.map((message,key) => {
+          {gameAds.map((ad, key) => {
             console.log(key, ' normalized score ', normalizedAdScores[key])
             return (                             
-                <div key={message.adId} className="flex-row-item" style={{height: '300px'}}> 
-                  {console.log("Ad computed score:", computeAdScore(message))}
+                <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 
+                  {console.log(ad, "Ad computed score:", computeAdScore(ad))}
+                  {ad.reward > 24 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
                   {normalizedAdScores[key] < 0.4 ? <Badge.Ribbon placement="start" text="Maybe not" color="red"> </Badge.Ribbon> : null }
                   {normalizedAdScores[key] >= 0.8 ? <Badge.Ribbon placement="start" text="Recommended" color="blue"> </Badge.Ribbon> : null }                    
                   {normalizedAdScores[key] > 0.6 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
                   {normalizedAdScores[key] > 0.95 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                    
                     
-                  <StyledHeader style={{marginTop: '2px'}}> {message.adId} </StyledHeader>                              
-                  <StyledAdInfo> {message.message} </StyledAdInfo>
+                  <StyledHeader style={{marginTop: '2px'}}> {ad.adId} </StyledHeader>                              
+                  <StyledAdInfo> {ad.message} </StyledAdInfo>
                       
                   <div style={{display: 'flex', justifyContent: 'center', flexDirection:'column', }}>
                       <div style={{margin: '0 150px' }}>
-                        <StyledAdInfo>Probability: <span style={{fontWeight: 'bolder'}}> {message.probability} </span> </StyledAdInfo>
+                        <StyledAdInfo>Probability: <span style={{fontWeight: 'bolder'}}> {ad.probability} </span> </StyledAdInfo>
                       </div>
 
                       <div style={{margin: '0 150px' }}>
-                        <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {message.reward} </span> </StyledAdInfo>
+                        <StyledAdInfo>Reward: <span style={{fontWeight: 'bolder'}}> {ad.reward} </span> </StyledAdInfo>
                       </div>
 
                       <div style={{position: 'relative', top: '10px'}}>
-                        <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(message.adId)} > Solve this add </StyledActionButton>
+                        <StyledActionButton style={{width: '200px', height: '30px', backgroundColor: `${goldIshColor}`}} onClick={() => solveMessageApi(ad.adId)} > Solve this add </StyledActionButton>
                       </div>
                   </div>
-
                 </div>
               ); 
             })}          

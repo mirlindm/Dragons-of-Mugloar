@@ -34,8 +34,7 @@ export const Shop = (props) => {
   const getItemsInShopApi = async () => {
     const { data } = await getItemsInShop(props.gameId);
     if(data) {
-      setItemsInShop(data);
-      console.log("items in shop", data);
+      setItemsInShop(data);     
     }
   }
 
@@ -46,7 +45,6 @@ export const Shop = (props) => {
     const { data } = await purchaseItem(props.gameId, itemId);
     if (data) {    
       message.success("Item Purchased!");
-      console.log("Item Purchased", data)
       props.setGold(props.gold - itemCost);
       props.setLives(data.lives);
     }

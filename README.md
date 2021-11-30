@@ -1,6 +1,6 @@
 # **Dragons of Mugloar**
 
-**Visual Experience** for **Dragons of Mugloar Game**. 
+**Visual Experience** for **Dragons og Mugloar Game**. 
 
 For more information about the game itself and the nicely documented APIs, you can visit the following website: [Dragons of Mugloar](https://dragonsofmugloar.com/)
 
@@ -36,11 +36,23 @@ npm test
 The Kingdom of Mugloar has noticeably changed over the short time of just a few years – it was not long ago when the state officials introduced a skilled dragon trainer to the country’s payroll to train the scaly beasts to protect our lands against invading knights, hungry for royal hands in marriage – princess or miscellaneous. The dragon trainer was successful in fending off the knights and making dragons commonplace in the Mugloarian everyday...
 
 ## Application Structure
-
+    
+    MUGOLAR_UI
     .
     ├── public                  # Application <html> </html> and favicon
     ├── src                     # Documentation files (alternatively `doc`)
-    ├── src                     # Source files (alternatively `lib` or `app`)
+    ├── src                     # Source files 
+        |── assets              # Images and screenshots used in the application and README.md file
+        |── components          # Reusable components, such as custom styled Buttons and Modal 
+        |── pages               # Application pages that carry on and showcase different application facets 
+        |── services            # Application service to interact and consume the exposed APIs 
+        |── styles              # Styled components that are reused in various other components 
+        |── utils               # Functions used to calculate game ads' scores and provide hints to the user
+        |── App.js              # Contains main logic and renders all other components used in the application
+        |── index.css           # Customizing the application styles and overwriting Ant Components design
+        |── index.js            # Rendering the whole application through the linked <html> </html>
+        |── reportWebVitals
+        |── setupTests.js
     ├── .gitignore              # Application files to ignore when committing to the remote repository
     ├── package-lock.json       # Tracking installed packages version throughout the application
     ├── package.json            # Application dependencies/packages (install them through ```npm install``` ) 
@@ -56,7 +68,6 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 
 ## Dragons of Mugloar Screenshots
 <img alt="Home Page" src="./src/assets/UI_Screenshots/HomePage.png">
-<img alt="Game Instructions" src="./src/assets/UI_Screenshots/Instructions.png">
 <img alt="Game Stats" src="./src/assets/UI_Screenshots/Stats.png">
 <img alt="Shop" src="./src/assets/UI_Screenshots/Shop.png">
 <img alt="Challenges" src="./src/assets/UI_Screenshots/Challenges.png">

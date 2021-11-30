@@ -28,7 +28,7 @@ const App = () => {
 
   const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isScoreEqualToOneThousand, setIsScoreEqualToOneThousand ] = useState(true);
+  const [hasScoreReachedThousand, setHasScoreReachedThousand ] = useState(true);
 
   const updateStats = data => {
     setScore(data.score);
@@ -92,9 +92,9 @@ const App = () => {
         startGameApi();
       }
   
-      if(isScoreEqualToOneThousand && data.score >= 1000) {  
+      if(hasScoreReachedThousand && data.score >= 1000) {  
         message.success('Congrats! You reached 1K score! Keep it up!');
-        setIsScoreEqualToOneThousand(false);
+        setHasScoreReachedThousand(false);
       }     
     }
   }

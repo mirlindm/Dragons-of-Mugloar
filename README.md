@@ -35,14 +35,15 @@ npm test
 
 The Kingdom of Mugloar has noticeably changed over the short time of just a few years – it was not long ago when the state officials introduced a skilled dragon trainer to the country’s payroll to train the scaly beasts to protect our lands against invading knights, hungry for royal hands in marriage – princess or miscellaneous. The dragon trainer was successful in fending off the knights and making dragons commonplace in the Mugloarian everyday...
 
-## Application GIFs
+## Dragons of Mugloar GIFs
 ![Dragons of Mugloar Part 1](https://user-images.githubusercontent.com/55096560/144057496-731242cb-0859-4644-b95a-588e638f809b.gif)
+<br />
 ![Dragons of Mugloar Part 2](https://user-images.githubusercontent.com/55096560/144057761-69d4e35c-13a0-434f-87fb-8346281ee39b.gif)
 
 
 
 
-## Frontend Caterpillar Screenshots
+## Dragons of Mugloar Screenshots
 <img alt="Home Page" src="./src/assets/UI_Screenshots/HomePage.png">
 <img alt="Game Instructions" src="./src/assets/UI_Screenshots/Instructions.png">
 <img alt="Game Stats" src="./src/assets/UI_Screenshots/Stats.png">

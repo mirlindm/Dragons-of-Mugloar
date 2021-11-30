@@ -51,6 +51,14 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 <img alt="Challenges" src="./src/assets/UI_Screenshots/Challenges.png">
 <img alt="Successful Challenge Solving" src="./src/assets/UI_Screenshots/ChallengeSolved.png">
 
+## TODO in the application (a couple of improvements that can be done)
+
+- Use a state management library such as Redux, MobX, etc., in order to have a centralized global state and access game details directly from the shared store. Currently, the state is managed through passing the props among components (not the ideal practice), as the application is rather small. 
+
+- With a global shared store for managing application state, in place, it would enable to extract more dedicated components in the application.
+
+- Testing the React components thoroughly through Jest or React Testing Library. 
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

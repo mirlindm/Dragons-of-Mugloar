@@ -15,6 +15,7 @@ import { Badge } from 'antd';
 import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
 import { Buttons } from './components/Buttons/Buttons';
 import { AdsModal } from './components/Modal/AdsModal';
+import gibberish from 'gibberish-detector';
 
 const App = () => {
   const [gameData, setGameData] = useState({});
@@ -59,8 +60,12 @@ const App = () => {
 
   const getAdsForGameApi = async () => {
     const { data } = await getMessagesForGame(gameData.gameId);
-    if(data) {             
-      const filteredAds = data.filter(ad => !ad.adId.endsWith('='));
+    if(data) {                   
+      const filteredAds = data.filter(ad => !ad.adId.endsWith('=') && gibberish.detect(ad.message) < 10);
+      console.log("Filtered:", filteredAds)
+      
+      //const removeGibberishAds = filteredAds
+      
       setGameAds(filteredAds.sort(sortGameMessagesByReward));
     }
   }
@@ -125,10 +130,10 @@ const App = () => {
                 <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 
                 {console.log(ad, "key: ", key)}
                   {/* {console.log(ad, "Ad computed score:", computeAdScore(ad))} */}
-                  {ad.reward >= 130 ? <Badge.Ribbon placement="end" text="TRAP!" color="black"> </Badge.Ribbon> : null }
+                  {ad.reward >= 130 ? <Badge.Ribbon className="trap-ad" placement="start" text="ISSA TRAP!!!" color="black"> </Badge.Ribbon> : null }
                   {key > 7 ? <Badge.Ribbon placement="start" text="Perhaps Later!" color="red"> </Badge.Ribbon> : null }
                   {key < 3 ? <Badge.Ribbon placement="start" text="Recommended!" color="blue"> </Badge.Ribbon> : null }                    
-                  {key < 5 && key >=3 ? <Badge.Ribbon placement="start" text="Go for it1" color="gold"> </Badge.Ribbon> : null }                    
+                  {key < 5 && key >=3 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
                   {/* {normalizedAdScores[key] > 0.95 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                     */}
                     
                   <StyledHeader style={{marginTop: '2px'}}> {ad.adId} </StyledHeader>                              

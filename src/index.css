@@ -371,3 +371,20 @@ border-radius: 10px;
 .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
   background: var(--dragonColorCode) !important; 
 }
+
+.trap-ad {
+  width: 150px;
+  height: 100px;
+  background-color: red;
+  animation-name: trap-ad;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  z-index: 1;
+}
+
+@keyframes trap-ad {
+  0%   {background-color: red;}
+  25%  {background-color: black;}
+  50%  {background-color: red;}
+  100% {background-color: black;}
+}

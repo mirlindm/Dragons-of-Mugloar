@@ -55,7 +55,7 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
         |── setupTests.js
     ├── .gitignore              # Application files to ignore when committing to the remote repository
     ├── package-lock.json       # Tracking installed packages version throughout the application
-    ├── package.json            # Application dependencies/packages (install them through ```npm install``` ) 
+    ├── package.json            # Application dependencies/packages (install them through *npm install* ) 
     └── README.md               # Application thorough description
 
 ## Dragons of Mugloar GIFs

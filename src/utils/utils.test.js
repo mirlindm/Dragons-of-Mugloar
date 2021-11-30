@@ -68,3 +68,33 @@ test('First element after sorting should have the highest reward', () => {
 
 
 
+// const adProbabilities = {
+//     'Sure thing': 0.95,
+//     'Walk in the park' : 0.9,
+//     'Piece of cake' : 0.8,
+//     'Quite likely' : 0.7,
+//     'Rather detrimental' : 0.2,
+//     'Suicide mission' : 0.1,
+//        'something': undefined
+// }
+
+// const getProbability = (probability) => {
+//     return adProbabilities[probability] !== undefined ? adProbabilities[probability] : 0.5;
+// }
+
+// test('First element after sorting should have the highest reward', () => { 
+//     expect(getProbability(adProbabilities)).toEqual(
+//         {
+//     'Sure thing': 0.95,
+//     'Walk in the park' : 0.9,
+//     'Piece of cake' : 0.8,
+//     'Quite likely' : 0.7,
+//     'Rather detrimental' : 0.2,
+//     'Suicide mission' : 0.1,
+//        'something': 0.5
+//         }
+//     );
+// });
+
+
+

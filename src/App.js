@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyledButton,
-         StyledParagraph,
+import { StyledButton,        
          StyledAdInfo,
          StyledHeader,
          goldIshColor, 
@@ -11,6 +10,7 @@ import { Welcome } from './pages/HomePage/Welcome';
 import { Stats } from './pages/GameStats/Stats';
 import { message } from 'antd';
 import { InstructionsDrawer } from './pages/Instructions/InstructionsDrawer';
+import { Hints } from './components/Hints/Hints';
 import { Badge } from 'antd';
 import { sortGameMessagesByReward } from './utils/utils';
 import { Buttons } from './components/Buttons/Buttons';
@@ -95,12 +95,8 @@ const App = () => {
       <div>
         <Stats gameId={gameData.gameId} score={score} gold={gold} lives={lives} />          
         <Buttons gold={gold} setGold={setGold} setLives={setLives} gameId={gameData.gameId} startGameApi={startGameApi} />
-
-        <div className="flex-row-container">
-          <div className="flex-row-item-one game-name" style={{marginTop: '30px'}}> 
-            <StyledParagraph style={{mixBlendMode: 'difference', top: '40px'}}>Take on Challenges Below</StyledParagraph>
-          </div>
-          
+        <Hints />
+        <div className="flex-row-container">          
           {gameAds.map((ad, key) => {            
             return (                             
                 <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 

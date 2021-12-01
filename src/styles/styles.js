@@ -151,7 +151,7 @@ export const StyledAdInfo = styled.p`
     font-size: 15px;     
     background: ${goldIshColor};
     z-index: 10;
-    padding: 5px;    
+    padding: 2px;    
     text-align: center;    
 `;
 

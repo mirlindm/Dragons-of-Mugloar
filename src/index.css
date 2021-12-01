@@ -262,3 +262,18 @@ code {
   50%  {background-color: red;}
   100% {background-color: black;}
 }
+
+/* HINTS */
+
+.hints {
+  background: transparent !important; 
+  text-align: center !important; 
+  font-size: 20px !important;
+  font-weight: bold !important; 
+  position: relative;  
+}
+
+.hints-probability {
+  font-weight: bolder !important; 
+  text-decoration: underline; 
+}

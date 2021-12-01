@@ -24,63 +24,23 @@ body {
   text-align: center;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .nowrap {
   white-space: nowrap;
 }
 
-/* Container */
-
-.container {
-  display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr; */
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  margin-bottom: -30px;
-}
+/* Game Name Baner */
 
 .game-name { 
   background: -webkit-linear-gradient(var(--goldColorCode), var(--dragonColorCode));
-}
-
-.ads { 
-  grid-area: 2 / 1 / 2 / 4; 
- }
-
-.lives { 
-  grid-area: 3 / 1 / 3 / 2; 
-  background: var(--dragonColorCode);
-}
-
-.score { 
-  grid-area: 3 / 2 / 3 / 3; 
-  background: var(--dragonColorCode);
-}
-
-.gold { 
-  grid-area: 3 / 3 / 3 / 4;
-  background: var(--dragonColorCode);
-}
-
-html, body, .container {
-  height: 100%;
-  margin: 0;
-}
-
-.container * {
-  margin: 15px 50px;
-  margin-bottom: -30px;
-  /* border: 5px solid #e25822; */
-  padding: 20px;
-  color: #fff;
-  font-family: Architects Daughter;
-  font-size: x-large;
-  font-weight: 700;
 }
 
 /* Popover */
@@ -112,6 +72,26 @@ html, body, .container {
   background-color: var(--dragonColorCode) !important; 
 }
 
+.ant-popover {
+  background-color: transparent !important;
+}
+
+.ant-popover-message > .anticon {
+  right: 90px !important;
+}
+
+.ant-popover-message-title {
+  color: var(--goldColorCode) !important;
+}
+
+.ant-popover-buttons button {
+  border: 1px solid;
+}
+
+.ant-popover-buttons button:hover {
+  border: 1px solid var(--goldColorCode);
+}
+
 /* Modal */
 
 .ant-modal-header {
@@ -137,82 +117,6 @@ html, body, .container {
 
 .ant-modal-centered {
   border: 5px solid var(--goldColorCode) !important;
-}
-
-/* Cards */
-
-.card {
-  margin: 20px;
-  padding: 20px;
-  width: 800px;
-  min-height: 200px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  background-color: var(--goldColorCode) !important;
-  border-radius: 10px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s;
-}
-
-.card:hover {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-  transform: scale(1.01);
-}
-
-.card__link,
-.card__exit,
-.card__icon {
-  position: relative;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.card__link::after {
-  position: absolute;
-  top: 25px;
-  left: 0;
-  content: "";
-  width: 0%;
-  height: 3px;
-  background-color: rgba(255, 255, 255, 0.6);
-  transition: all 0.5s;
-}
-
-.card__link:hover::after {
-  width: 100%;
-}
-
-.card__exit {
-  grid-row: 1/2;
-  justify-self: end;
-}
-
-.card__icon {
-  grid-row: 2/3;
-  font-size: 30px;
-}
-
-.card__title {
-  grid-row: 3/4;
-  font-weight: 400;
-  color: #ffffff;
-  margin-top: -50px;
-}
-
-.card__apply {
-  grid-row: 4/5;
-  align-self: center;
-}
-
-.card-1 {
-  background-color: var(--goldColorCode) !important;
-}
-
-@media (max-width: 1600px) {
-  .cards {
-    justify-content: center;
-  }
 }
 
 /* Drawer */
@@ -273,7 +177,6 @@ html, body, .container {
   border-radius: 20px;
 }
 
-
 /* Page */
 
 .flex-row-container {  
@@ -292,16 +195,16 @@ html, body, .container {
 }
 
 .flex-row-container > .flex-row-item {
-  flex: 40%; /* or - flex: 0 50% - or - flex-basis: 50% - */
+  flex: 40%;
   margin-bottom: 10px;
   margin-right: 10px;
   height: 150px;
 }
 
 .flex-row-item {
-background-color: var(--dragonColorCode);
-border: 1px solid var(--goldColorCode);
-border-radius: 10px;
+  background-color: var(--dragonColorCode);
+  border: 1px solid var(--goldColorCode);
+  border-radius: 10px;
 }
 
 .flex-row-container > .flex-row-item-one {
@@ -315,62 +218,33 @@ border-radius: 10px;
   height: 50px;
 }
 
-/* Popover */
-.ant-popover {
-  background-color: transparent !important;
-}
-
-.ant-popover-message > .anticon {
-  right: 90px !important;
-}
-
-.ant-popover-message-title {
-  color: var(--goldColorCode) !important;
-}
-
-.ant-popover-buttons button {
-  border: 1px solid;
-}
-
-.ant-popover-buttons button:hover {
-  border: 1px solid var(--goldColorCode);
-}
-
-/* Messages */
-
-/* .ant-message-notice-content::after {
-  content: '🐉'; 
-} */
-
 /* Scrollbar */
 
 ::-webkit-scrollbar {
   width: 15px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey; 
   border-radius: 10px;
 }
- 
-/* Handle */
 
 ::-webkit-scrollbar-thumb {
   background: var(--dragonColorCode); 
   border-radius: 10px;
 }
 
-/* Handle on hover */
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--dragonColorCode); 
 }
 
 /* Instructions Steps Icon */
+
 .ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
   background: var(--dragonColorCode) !important; 
 }
+
+/* Trap Ads */
 
 .trap-ad {
   width: 150px;

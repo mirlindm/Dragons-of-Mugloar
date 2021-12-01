@@ -50,11 +50,7 @@ const App = () => {
   const getAdsForGameApi = async () => {
     const { data } = await getMessagesForGame(gameData.gameId);
     if(data) {                   
-      const filteredAds = data.filter(ad => !ad.adId.endsWith('=') && gibberish.detect(ad.message) < 10);
-      console.log("Filtered:", filteredAds)
-      
-      //const removeGibberishAds = filteredAds
-      
+      const filteredAds = data.filter(ad => !ad.adId.endsWith('=') && gibberish.detect(ad.message) < 10);            
       setGameAds(filteredAds.sort(sortGameMessagesByReward));
     }
   }
@@ -62,9 +58,7 @@ const App = () => {
   const solveMessageApi = async (adId) => {
     const { data } = await solveMessage(gameData.gameId, adId);
 
-    if(data) {
-      console.log("solved: ", data);
-      
+    if(data) {      
       setAdsToSolve(data);
       setIsModalVisible(true);
       updateStats(data);   
@@ -107,17 +101,13 @@ const App = () => {
             <StyledParagraph style={{mixBlendMode: 'difference', top: '40px'}}>Take on Challenges Below</StyledParagraph>
           </div>
           
-          {gameAds.map((ad, key) => {
-            // console.log(key, ' normalized score ', normalizedAdScores[key])
+          {gameAds.map((ad, key) => {            
             return (                             
                 <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 
-                {/* {console.log(ad, "key: ", key)} */}
-                  {/* {console.log(ad, "Ad computed score:", computeAdScore(ad))} */}
                   {ad.reward >= 140 ? <Badge.Ribbon className="trap-ad" placement="start" text="ISSA TRAP!!!" color="black"> </Badge.Ribbon> : null }
                   {key > 7 ? <Badge.Ribbon placement="start" text="Perhaps Later!" color="red"> </Badge.Ribbon> : null }
                   {key < 3 ? <Badge.Ribbon placement="start" text="Recommended!" color="blue"> </Badge.Ribbon> : null }                    
-                  {key < 5 && key >=3 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    
-                  {/* {normalizedAdScores[key] > 0.95 ? <Badge.Ribbon placement="start" text="Careful! Can be a trap!" color="black"> </Badge.Ribbon> : null }                     */}
+                  {key < 5 && key >=3 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                  
                     
                   <StyledHeader style={{marginTop: '2px'}}> {ad.adId} </StyledHeader>                              
                   <StyledAdInfo> {ad.message} </StyledAdInfo>
@@ -139,8 +129,7 @@ const App = () => {
               ); 
             })}          
         </div>      
-        <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />         
-        
+        <AdsModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} adsToSolve={adsToSolve} />        
       </div>      
       }
     </div>

@@ -35,6 +35,22 @@ npm test
 
 The Kingdom of Mugloar has noticeably changed over the short time of just a few years – it was not long ago when the state officials introduced a skilled dragon trainer to the country’s payroll to train the scaly beasts to protect our lands against invading knights, hungry for royal hands in marriage – princess or miscellaneous. The dragon trainer was successful in fending off the knights and making dragons commonplace in the Mugloarian everyday...
 
+## How it works, briefly...
+
+- Upon application start, user can either begin to play or check out game instructions.
+- When the game is started, user's stats are displayed on the screen (score, lives and gold) and they change accordingly.
+- User can restart the game by clicking on the Restart button or refreshing the browser.
+- User can view the shop and purchase an item (Healing Potion in this case, as purchasing other items is not supported so far).
+- A list of challenges/ads are shown on the screen for the user to tackle:
+    - Ads are filtered/Hints are given to the user: 
+    1. Ads containing gibberish messages or id-s are not taken into consideration
+    2. Ads with rewards equal to and higher than 140 are deemed as Traps (observed pattern)
+    3. Hints are given to the user on which ads to solve, based on ads' properties (reward, probability, etc.)
+
+- User gets a warning when the number of lives is 1, so that a Healing Potion from the shop can be purchased
+- User gets a success notification when the score reaches 1000!
+- Game is over when there are no more lives remaining and a new game begins shortly after.      
+
 ## Application Structure
     
     MUGOLAR_UI
@@ -78,6 +94,10 @@ The Kingdom of Mugloar has noticeably changed over the short time of just a few 
 - Use a state management library such as Redux, MobX, etc., in order to have a centralized global state and access game details directly from the shared store. Currently, the state is managed through passing the props among components (not the ideal practice), as the application is rather small. 
 
 - With a global shared store for managing application state, in place, it would enable to extract more dedicated components in the application.
+
+- Improve the logic of the functions that provide recommendations to the user in terms of solving the challenges.
+
+- Implement purchasing the entire collection of items from the shop and update the stats accordingly.
 
 - Testing the React components thoroughly through Jest or React Testing Library. 
 

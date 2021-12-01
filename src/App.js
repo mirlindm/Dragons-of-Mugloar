@@ -12,7 +12,7 @@ import { Stats } from './pages/GameStats/Stats';
 import { message } from 'antd';
 import { InstructionsDrawer } from './pages/Instructions/InstructionsDrawer';
 import { Badge } from 'antd';
-import { sortGameMessagesByReward, computeAdScore } from './utils/utils';
+import { sortGameMessagesByReward } from './utils/utils';
 import { Buttons } from './components/Buttons/Buttons';
 import { AdsModal } from './components/Modal/AdsModal';
 import gibberish from 'gibberish-detector';
@@ -25,7 +25,6 @@ const App = () => {
 
   const [gameAds, setGameAds] = useState([]);
   const [adsToSolve, setAdsToSolve] = useState([]);
-  // const [normalizedAdScores, setNormalizedAdScores] = useState([]);
 
   const [hasGameStarted, setHasGameStarted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -45,16 +44,6 @@ const App = () => {
   }
 
   useEffect(() => {
-
-    // const getMessagesForGameApi = async () => {
-    //   await getMessagesForGame(gameData.gameId);
-    //   .then(response => {
-    //     setGameMessages(response.data); 
-    //     console.log(response.data);
-    //   })
-    //   .catch(e => console.log(e));
-    // }
-    
     getAdsForGameApi();
   }, [gameData.gameId]);
 
@@ -70,19 +59,12 @@ const App = () => {
     }
   }
 
-  // const normalizeAdsScore = () => {    
-  //   setNormalizedAdScores(gameAds.map(ad => computeAdScore(ad)));
-  //   // console.log("computed each ad score: ", normalizedAdScores);
-
-  //   setNormalizedAdScores(normalizedAdScores / Math.max(...normalizedAdScores));
-  //   // console.log("Normalized each ad score: ", normalizedAdScores);
-  // }
-
   const solveMessageApi = async (adId) => {
     const { data } = await solveMessage(gameData.gameId, adId);
 
     if(data) {
       console.log("solved: ", data);
+      
       setAdsToSolve(data);
       setIsModalVisible(true);
       updateStats(data);   
@@ -93,7 +75,8 @@ const App = () => {
       }
   
       if(data.lives === 0) {
-        message.warning('Game Over. New Game Will begin shortly ... ');
+        message.warning(`Game Over. You lost at your ${adsToSolve.turn+1} challenge. 
+                        New Game Will begin shortly ... `);
         startGameApi();
       }
   
@@ -128,9 +111,9 @@ const App = () => {
             // console.log(key, ' normalized score ', normalizedAdScores[key])
             return (                             
                 <div key={ad.adId} className="flex-row-item" style={{height: '300px'}}> 
-                {console.log(ad, "key: ", key)}
+                {/* {console.log(ad, "key: ", key)} */}
                   {/* {console.log(ad, "Ad computed score:", computeAdScore(ad))} */}
-                  {ad.reward >= 130 ? <Badge.Ribbon className="trap-ad" placement="start" text="ISSA TRAP!!!" color="black"> </Badge.Ribbon> : null }
+                  {ad.reward >= 140 ? <Badge.Ribbon className="trap-ad" placement="start" text="ISSA TRAP!!!" color="black"> </Badge.Ribbon> : null }
                   {key > 7 ? <Badge.Ribbon placement="start" text="Perhaps Later!" color="red"> </Badge.Ribbon> : null }
                   {key < 3 ? <Badge.Ribbon placement="start" text="Recommended!" color="blue"> </Badge.Ribbon> : null }                    
                   {key < 5 && key >=3 ? <Badge.Ribbon placement="start" text="Go for it" color="gold"> </Badge.Ribbon> : null }                    

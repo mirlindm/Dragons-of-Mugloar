@@ -25,12 +25,13 @@ export const AdsModal = (props) => {
           ]}
         >
             <div>
-              <h1> {props.adsToSolve.success ? <Confetti numberOfPieces={150} width={500} height={700}/> : <StyledHeader>Challenge failed</StyledHeader>} </h1>
+              <h1> {props.adsToSolve.success ? <Confetti numberOfPieces={150} width={500} height={700}/> : <StyledHeader style={{textAlign: 'center'}}>Challenge failed</StyledHeader>} </h1>
               <StyledHeader style={{fontSize: '30px', textAlign: 'center'}}> {props.adsToSolve.message} </StyledHeader>
-              <StyledAdInfo>Your score is {props.adsToSolve.score}</StyledAdInfo>
-              <StyledAdInfo>Your highscore is {props.adsToSolve.highscore}</StyledAdInfo>
-              <StyledAdInfo>You have {props.adsToSolve.gold} gold!</StyledAdInfo>            
-              <StyledAdInfo>You have {props.adsToSolve.lives} lives</StyledAdInfo>
+              <StyledAdInfo>Your current score is {props.adsToSolve.score}</StyledAdInfo>              
+              <StyledAdInfo>You currently have {props.adsToSolve.gold} gold!</StyledAdInfo>            
+              <StyledAdInfo>You currently have {props.adsToSolve.lives} lives</StyledAdInfo>
+
+              <StyledHeader style={{textAlign: 'center', marginTop: '20px'}}>KEEP GOING!</StyledHeader>
             </div>
         </Modal> 
     )
